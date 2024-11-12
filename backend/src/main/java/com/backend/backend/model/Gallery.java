@@ -1,9 +1,15 @@
 package com.backend.backend.model;
 
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
+import java.util.Date;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.Entity;;
 
+@Entity
 public class Gallery {
 
     @Id
@@ -19,6 +25,18 @@ public class Gallery {
     private String background;
 
     private String description;
+
+    @ManyToOne
+    private User user;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createdDate;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date updatedDate;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date deletedDate;
 
     // Constructeur par défaut
     public Gallery() {
@@ -91,6 +109,40 @@ public class Gallery {
     // Setter pour 'description'
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    // Getter et Setter pour 'createdDate'
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    // Getter et Setter pour 'updatedDate'
+    public Date getUpdatedDate() {
+        return updatedDate;
+    }
+
+    public void setUpdatedDate(Date updatedDate) {
+        this.updatedDate = updatedDate;
+    }
+
+    public Date getDeletedDate() {
+        return this.deletedDate;
+    }
+
+    public void setDeletedDate(Date deletedDate) {
+        this.deletedDate = deletedDate;
+    }
+
+    public User getUser() {
+        return this.user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
 }

@@ -4,7 +4,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import lombok.Data;
+import java.util.List;
 
 @Entity
 @Data
@@ -17,6 +19,12 @@ public class User {
     private String pseudo;
     private String email;
     private String password;
+
+    @OneToMany(mappedBy = "user")
+    private List<Article> articles;
+
+    @OneToMany(mappedBy = "user")
+    private List<Gallery> galleries;
 
     public User() {
     }
@@ -62,6 +70,22 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<Article> getArticles() {
+        return articles;
+    }
+
+    public void setArticles(List<Article> articles) {
+        this.articles = articles;
+    }
+
+    public List<Gallery> getGalleries() {
+        return this.galleries;
+    }
+
+    public void setGalleries(List<Gallery> galleries) {
+        this.galleries = galleries;
     }
 
 }

@@ -1,37 +1,53 @@
 package com.backend.backend.model;
 
+import java.util.List;
+
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Entity;
+
+@Entity
 public class Category {
 
-    private String code;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+
     private String name;
 
-    // Constructeur par défaut
+    @OneToMany(mappedBy = "category")
+    private List<Article> articles;
+
     public Category() {
     }
 
-    // Constructeur avec paramètres
-    public Category(String code, String name) {
-        this.code = code;
+    public Category(String name) {
         this.name = name;
     }
 
-    // Getter pour 'code'
-    public String getCode() {
-        return code;
+    public Long getId() {
+        return id;
     }
 
-    // Setter pour 'code'
-    public void setCode(String code) {
-        this.code = code;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    // Getter pour 'name'
     public String getName() {
         return name;
     }
 
-    // Setter pour 'name'
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<Article> getArticles() {
+        return this.articles;
+    }
+
+    public void setArticles(List<Article> articles) {
+        this.articles = articles;
     }
 }
