@@ -22,9 +22,9 @@ public class UserService {
         User user = userRepository.findByEmail(email);
 
         if (user != null && passwordEncoder.matches(password, user.getPassword())) {
-            return user; // Utilisateur authentifié avec succès
+            return user;
         }
-        return null; // Authentification échouée
+        return null;
     }
 
     public User createUser(User user) {
