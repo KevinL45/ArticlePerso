@@ -18,11 +18,17 @@ public class UserService {
         return passwordEncoder.encode(plainPassword);
     }
 
-    public boolean checkPassword(String plainPassword, String hashedPassword) {
-        return passwordEncoder.matches(plainPassword, hashedPassword);
+    public User authenticateUser(String email, String password) {
+        User user = userRepository.findByEmail(email);
+
+        if (user != null && passwordEncoder.matches(password, user.getPassword())) {
+            return user; // Utilisateur authentifié avec succès
+        }
+        return null; // Authentification échouée
     }
 
     public User createUser(User user) {
+        user.setPassword(hashPassword(user.getPassword()));
         return userRepository.save(user);
     }
 }
