@@ -5,6 +5,6 @@ import com.backend.backend.model.Article;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ArticleRespository extends JpaRepository<Article, Long> {
+public interface ArticleRespoitory extends JpaRepository<Article, Long> {
 
 }

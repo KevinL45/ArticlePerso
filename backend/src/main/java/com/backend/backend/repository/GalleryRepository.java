@@ -5,6 +5,6 @@ import com.backend.backend.model.Gallery;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface GalleryRespository extends JpaRepository<Gallery, Long> {
+public interface GalleryRepository extends JpaRepository<Gallery, Long> {
 
 }

@@ -5,6 +5,6 @@ import com.backend.backend.model.Category;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface CategoryRespository extends JpaRepository<Category, Long> {
+public interface CategoryRepository extends JpaRepository<Category, Long> {
 
 }

@@ -13,10 +13,17 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(csrf -> csrf.disable()) // Désactive CSRF pour simplifier les tests (à réactiver en production)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/", "/users/login", "/users/add").permitAll() // Autorise l'accès public à la
-                        // racine ("/")
-                        .anyRequest().authenticated() // Toutes les autres requêtes nécessitent une authentification
-                )
+                        .requestMatchers("/",
+                                "/users/login",
+                                "/users/add",
+                                "/categories/list",
+                                "/categories/details/{id}",
+                                "/articles/list",
+                                "/articles/details/{id}",
+                                "/galleries/list",
+                                "/galleries/details/{id}")
+                        .permitAll()
+                        .anyRequest().authenticated())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         return http.build();
     }
