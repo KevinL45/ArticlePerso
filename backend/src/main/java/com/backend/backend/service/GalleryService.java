@@ -5,6 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.backend.backend.model.Gallery;
 import com.backend.backend.repository.GalleryRepository;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,17 +15,18 @@ public class GalleryService {
 
     @Autowired
     private GalleryRepository galleryRepository;
+    private Date now = Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant());
 
     public Gallery save(Gallery gallery) {
-        gallery.setCreatedDate(null);
-        gallery.setUpdatedDate(null);
+        gallery.setCreatedDate(now);
+        gallery.setUpdatedDate(now);
         return galleryRepository.save(gallery);
     }
 
     public Gallery update(Long id, Gallery gallery) {
         Optional<Gallery> existingGallery = galleryRepository.findById(id);
         if (existingGallery.isPresent()) {
-            gallery.setUpdatedDate(null);
+            gallery.setUpdatedDate(now);
             return galleryRepository.save(gallery);
         } else {
             throw new RuntimeException("Aucune galerie");

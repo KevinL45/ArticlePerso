@@ -2,8 +2,12 @@ package com.backend.backend.service;
 
 import com.backend.backend.model.Article;
 import com.backend.backend.repository.ArticleRespoitory;
+
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 import java.util.Optional;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -11,10 +15,11 @@ public class ArticleService {
 
     @Autowired
     private ArticleRespoitory articleRespoitory;
+    private Date now = Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant());
 
     public Article save(Article article) {
-        article.setCreatedDate(null);
-        article.setUpdatedDate(null);
+        article.setCreatedDate(now);
+        article.setUpdatedDate(now);
         return articleRespoitory.save(article);
     }
 
@@ -22,8 +27,8 @@ public class ArticleService {
         Optional<Article> existingArticle = articleRespoitory.findById(id);
         if (existingArticle.isPresent()) {
             Article updatedArticle = existingArticle.get();
-            updatedArticle.setCreatedDate(null);
-            updatedArticle.setUpdatedDate(null);
+            updatedArticle.setCreatedDate(now);
+            updatedArticle.setUpdatedDate(now);
             return articleRespoitory.save(article);
         } else {
             throw new RuntimeException("Aucune article");
