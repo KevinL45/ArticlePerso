@@ -37,11 +37,9 @@ public class Article {
     @Temporal(TemporalType.TIMESTAMP)
     private Date deletedDate;
 
-    // Constructeur par défaut
     public Article() {
     }
 
-    // Constructeur avec paramètres
     public Article(String title, String description, String imageUrl, Date createdDate, Date updatedDate,
             Date deletedDate) {
         this.title = title;
@@ -52,7 +50,6 @@ public class Article {
         this.deletedDate = deletedDate;
     }
 
-    // Getter et Setter pour 'id'
     public long getId() {
         return id;
     }
@@ -61,7 +58,6 @@ public class Article {
         this.id = id;
     }
 
-    // Getter et Setter pour 'title'
     public String getTitle() {
         return title;
     }
@@ -70,7 +66,6 @@ public class Article {
         this.title = title;
     }
 
-    // Getter et Setter pour 'description'
     public String getDescription() {
         return description;
     }
@@ -79,7 +74,6 @@ public class Article {
         this.description = description;
     }
 
-    // Getter et Setter pour 'imageUrl'
     public String getImageUrl() {
         return imageUrl;
     }
@@ -88,7 +82,6 @@ public class Article {
         this.imageUrl = imageUrl;
     }
 
-    // Getter et Setter pour 'createdDate'
     public Date getCreatedDate() {
         return createdDate;
     }
@@ -97,7 +90,6 @@ public class Article {
         this.createdDate = createdDate;
     }
 
-    // Getter et Setter pour 'updatedDate'
     public Date getUpdatedDate() {
         return updatedDate;
     }

@@ -38,11 +38,9 @@ public class Gallery {
     @Temporal(TemporalType.TIMESTAMP)
     private Date deletedDate;
 
-    // Constructeur par défaut
     public Gallery() {
     }
 
-    // Constructeur avec paramètres
     public Gallery(String name, String video, String logo, String background, String description) {
         this.name = name;
         this.video = video;
@@ -51,67 +49,54 @@ public class Gallery {
         this.description = description;
     }
 
-    // Getter pour 'id'
     public long getId() {
         return id;
     }
 
-    // Setter pour 'id'
     public void setId(long id) {
         this.id = id;
     }
 
-    // Getter pour 'name'
     public String getName() {
         return name;
     }
 
-    // Setter pour 'name'
     public void setName(String name) {
         this.name = name;
     }
 
-    // Getter pour 'video'
     public String getVideo() {
         return video;
     }
 
-    // Setter pour 'video'
     public void setVideo(String video) {
         this.video = video;
     }
 
-    // Getter pour 'logo'
     public String getLogo() {
         return logo;
     }
 
-    // Setter pour 'logo'
     public void setLogo(String logo) {
         this.logo = logo;
     }
 
-    // Getter pour 'background'
     public String getBackground() {
         return background;
     }
 
-    // Setter pour 'background'
     public void setBackground(String background) {
         this.background = background;
     }
 
-    // Getter pour 'description'
     public String getDescription() {
         return description;
     }
 
-    // Setter pour 'description'
     public void setDescription(String description) {
         this.description = description;
     }
 
-    // Getter et Setter pour 'createdDate'
     public Date getCreatedDate() {
         return createdDate;
     }
@@ -120,7 +105,6 @@ public class Gallery {
         this.createdDate = createdDate;
     }
 
-    // Getter et Setter pour 'updatedDate'
     public Date getUpdatedDate() {
         return updatedDate;
     }

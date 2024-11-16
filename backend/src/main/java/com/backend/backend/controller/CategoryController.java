@@ -1,6 +1,6 @@
 package com.backend.backend.controller;
 
-import com.backend.backend.model.Category; // Assurez-vous d'importer la bonne classe Category
+import com.backend.backend.model.Category;
 import com.backend.backend.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
