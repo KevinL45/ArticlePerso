@@ -9,23 +9,21 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 public class SecurityConfig {
 
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.csrf(csrf -> csrf.disable()) // Désactive CSRF pour simplifier les tests (à réactiver en production)
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/",
-                                "/users/login",
-                                "/users/add",
-                                "/categories/list",
-                                "/categories/details/{id}",
-                                "/articles/list",
-                                "/articles/details/{id}",
-                                "/galleries/list",
-                                "/galleries/details/{id}")
-                        .permitAll()
-                        .anyRequest().authenticated())
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
-        return http.build();
-    }
+        @Bean
+        public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+                http.csrf(csrf -> csrf.disable())
+                                .authorizeHttpRequests(auth -> auth
+                                                .requestMatchers("/", "/users/login", "/users/add", "/categories/list",
+                                                                "/categories/details/{id}", "/articles/list",
+                                                                "/articles/details/{id}",
+                                                                "/galleries/list", "/galleries/details/{id}")
+                                                .permitAll()
+                                                .anyRequest().authenticated())
+                                // .addFilter(new JwtAuthenticationFilter(authenticationManager()))
+                                .sessionManagement(session -> session
+                                                .sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+
+                return http.build();
+        }
 
 }
