@@ -26,12 +26,13 @@ public class UserController {
 
     @PostMapping("/login")
     public ResponseEntity<String> login(@Validated @RequestBody User user) {
-        User authenticatedUser = userService.authenticateUser(user.getEmail(), user.getPassword());
+        String token = userService.authenticateUser(user.getEmail(), user.getPassword());
 
-        if (authenticatedUser != null) {
-            return ResponseEntity.ok("Vous êtes connecté");
+        if (token != null) {
+            return ResponseEntity.ok("Voici votre token : " + token);
         } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("L'e-mail et le mot de passe sont incorrect");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body("L'e-mail ou mot de passe sont incorrect, donc le token n'est pas crée");
         }
     }
 
