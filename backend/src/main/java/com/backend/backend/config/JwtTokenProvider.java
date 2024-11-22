@@ -13,7 +13,7 @@ public class JwtTokenProvider {
 
     // Utiliser une clé secrète de 256 bits (32 bytes) pour HMAC
     private String secretKey = "thisisaverysecretkeyforjwtwhichshouldbe256bitlong!";
-    private long validityInMilliseconds = 3600000; // 1 heure
+    private long validityInMilliseconds = 7200000; // 2 heure
 
     // Créer un token JWT à partir des informations utilisateur
     public String createToken(String username) {
