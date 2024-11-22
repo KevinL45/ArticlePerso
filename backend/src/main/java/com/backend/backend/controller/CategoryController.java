@@ -4,6 +4,7 @@ import com.backend.backend.model.Category;
 import com.backend.backend.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,13 +22,27 @@ public class CategoryController {
 
     @PostMapping("add")
     @ResponseStatus(HttpStatus.CREATED)
-    public Category addCategory(@RequestBody Category category) {
-        return categoryService.save(category);
+    public ResponseEntity<String> addCategory(@RequestBody Category category) {
+        try {
+            categoryService.save(category);
+            return ResponseEntity
+                    .status(HttpStatus.CREATED)
+                    .body("Catégorie ajoutée avec succès : " + category.getName());
+        } catch (IllegalArgumentException ex) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+        }
     }
 
     @PutMapping("update/{id}")
-    public Category putCategory(@PathVariable Long id, @RequestBody Category category) {
-        return categoryService.update(id, category);
+    public ResponseEntity<String> putCategory(@PathVariable Long id, @RequestBody Category category) {
+        try {
+            categoryService.update(id, category);
+            return ResponseEntity
+                    .status(HttpStatus.CREATED)
+                    .body("Catégorie modifié avec succès : " + category.getName());
+        } catch (IllegalArgumentException ex) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+        }
     }
 
     @GetMapping("list")

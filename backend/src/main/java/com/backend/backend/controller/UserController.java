@@ -20,8 +20,17 @@ public class UserController {
 
     @PostMapping("/add")
     @ResponseStatus(HttpStatus.CREATED)
-    public User addUser(@RequestBody User user) {
-        return userService.createUser(user);
+    public ResponseEntity<String> addUser(@RequestBody User user) {
+        try {
+            userService.createUser(user);
+            return ResponseEntity
+                    .status(HttpStatus.CREATED)
+                    .body("Vous etes inscrit, vous pouvez vous connecter ");
+
+        } catch (IllegalArgumentException ex) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+
+        }
     }
 
     @PostMapping("/login")
@@ -29,7 +38,7 @@ public class UserController {
         String token = userService.authenticateUser(user.getEmail(), user.getPassword());
 
         if (token != null) {
-            return ResponseEntity.ok("Voici votre token : " + token);
+            return ResponseEntity.ok(token);
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                     .body("L'e-mail ou mot de passe sont incorrect, donc le token n'est pas crée");

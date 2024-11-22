@@ -20,11 +20,17 @@ public class UserService implements UserDetailsService {
     @Autowired
     private JwtTokenProvider jwtTokenProvider;
 
-    private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    @Autowired
     private RegexValidor regexValidor;
+
+    private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     public String hashPassword(String plainPassword) {
         return passwordEncoder.encode(plainPassword);
+    }
+
+    public boolean isEmailValid(String email) {
+        return regexValidor.isValidEmail(email);
     }
 
     public String authenticateUser(String email, String password) {
@@ -44,9 +50,9 @@ public class UserService implements UserDetailsService {
         User emailExist = userRepository.findByEmail(user.getEmail());
         User pseudoExist = userRepository.findByPseudo(user.getPseudo());
 
-        if (regexValidor.isValidEmail(user.getEmail())) {
-            throw new IllegalArgumentException("L'email est invalide.");
-        }
+        // if (regexValidor.isValidEmail(user.getEmail())) {
+        // throw new IllegalArgumentException("L'email est invalide.");
+        // }
 
         if (emailExist != null) {
             throw new IllegalArgumentException("Un utilisateur avec cet email existe déjà.");

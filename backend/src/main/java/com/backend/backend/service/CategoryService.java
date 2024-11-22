@@ -27,13 +27,13 @@ public class CategoryService {
         if (idCategory.isPresent()) {
             Category updatedCategory = idCategory.get();
             Category nameCategory = categoryRepository.findByName(category.getName());
-            if (nameCategory == null) {
+            if (nameCategory != null) {
                 throw new IllegalArgumentException("Le nom de la catégorie existe déjà.");
             }
             updatedCategory.setName(category.getName());
             return categoryRepository.save(updatedCategory);
         } else {
-            throw new RuntimeException("Aucune catégorie");
+            throw new IllegalArgumentException("Aucune catégorie.");
         }
     }
 
@@ -42,6 +42,6 @@ public class CategoryService {
     }
 
     public Category getCategoryById(Long id) {
-        return categoryRepository.findById(id).orElseThrow(() -> new RuntimeException("Aucune catégorie"));
+        return categoryRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Aucune catégorie"));
     }
 }
