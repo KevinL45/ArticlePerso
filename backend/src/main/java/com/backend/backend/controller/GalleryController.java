@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,13 +26,27 @@ public class GalleryController {
 
     @PostMapping("add")
     @ResponseStatus(HttpStatus.CREATED)
-    public Gallery addGallery(@RequestBody Gallery gallery) {
-        return galleryService.save(gallery);
+    public ResponseEntity<String> addGallery(@RequestBody Gallery gallery) {
+        try {
+            galleryService.save(gallery);
+            return ResponseEntity
+                    .status(HttpStatus.CREATED)
+                    .body("La galerie a été crée");
+        } catch (IllegalArgumentException ex) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+        }
     }
 
     @PutMapping("update/{id}")
-    public Gallery putGallery(@PathVariable Long id, @RequestBody Gallery gallery) {
-        return galleryService.update(id, gallery);
+    public ResponseEntity<String> putGallery(@PathVariable Long id, @RequestBody Gallery gallery) {
+        try {
+            galleryService.update(id, gallery);
+            return ResponseEntity
+                    .status(HttpStatus.CREATED)
+                    .body("La galerie a été modifié");
+        } catch (IllegalArgumentException ex) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+        }
     }
 
     @GetMapping("list")

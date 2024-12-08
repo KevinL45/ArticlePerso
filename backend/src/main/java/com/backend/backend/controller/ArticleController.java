@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 import com.backend.backend.model.Article;
 
@@ -22,13 +23,27 @@ public class ArticleController {
 
     @PostMapping("add")
     @ResponseStatus(HttpStatus.CREATED)
-    public Article addArticle(@RequestBody Article article) {
-        return articleService.save(article);
+    public ResponseEntity<String> addArticle(@RequestBody Article article) {
+        try {
+            articleService.save(article);
+            return ResponseEntity
+                    .status(HttpStatus.CREATED)
+                    .body("L'article a été crée");
+        } catch (IllegalArgumentException ex) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+        }
     }
 
     @PutMapping("update/{id}")
-    public Article putArticle(@PathVariable Long id, @RequestBody Article article) {
-        return articleService.update(id, article);
+    public ResponseEntity<String> putArticle(@PathVariable Long id, @RequestBody Article article) {
+        try {
+            articleService.update(id, article);
+            return ResponseEntity
+                    .status(HttpStatus.CREATED)
+                    .body("L'article a été modifié");
+        } catch (IllegalArgumentException ex) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+        }
     }
 
     @GetMapping("list")

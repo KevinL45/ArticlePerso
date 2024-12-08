@@ -29,7 +29,7 @@ public class GalleryService {
             gallery.setUpdatedDate(now);
             return galleryRepository.save(gallery);
         } else {
-            throw new RuntimeException("Aucune galerie");
+            throw new IllegalArgumentException("Aucune gallerie");
         }
     }
 

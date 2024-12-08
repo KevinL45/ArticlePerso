@@ -31,7 +31,7 @@ public class ArticleService {
             updatedArticle.setUpdatedDate(now);
             return articleRespoitory.save(article);
         } else {
-            throw new RuntimeException("Aucune article");
+            throw new IllegalArgumentException("Aucune article");
         }
     }
 
