@@ -10,10 +10,13 @@
     color: black;
     text-decoration: none;
     margin-left: 15px;
-    cursor: pointer;  /* Assurez-vous que le curseur change en survol pour signaler que c'est cliquable */
-
-    &:hover {
-      text-decoration: underline;
-    }
+    cursor: pointer; /* Assurez-vous que le curseur change en survol */
+    z-index: 10;  /* Assurez-vous que les liens sont au-dessus des autres éléments */
   }
+  
+  nav a:hover {
+    text-decoration: underline;
+  }
+  
+  
 }

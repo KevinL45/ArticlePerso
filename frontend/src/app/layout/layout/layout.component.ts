@@ -5,7 +5,6 @@ import { RouterModule } from '@angular/router'; // Nécessaire pour le <router-o
 
 @Component({
   selector: 'app-layout',
-  standalone: true,
   imports: [HeaderComponent, FooterComponent, RouterModule], // Import des composants autonomes
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.scss']
