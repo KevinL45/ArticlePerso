@@ -31,8 +31,8 @@ export class UserFormComponent {
       if (this.userForm.valid) {
         const userData = this.userForm.value;
         console.log('User Data:', userData);
-        // Envoyer les données à l'API ici
-      }
+      
+              }
 
     
   }
