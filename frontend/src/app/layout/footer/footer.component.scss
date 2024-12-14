@@ -1,7 +1,25 @@
+/* Footer */
 .footer {
-    background-color: #f1f1f1;
-    text-align: center;
-    padding: 10px 0;
-    margin-top: auto;
+  text-align: center;
+  padding: 1rem;
+  background-color: #222;
+  color: #bbb;
+  font-size: 0.9rem;
+
+  p {
+    margin: 0;
+
+    &::before {
+      content: "© ";
+    }
+
+    &::after {
+      content: " | Tous droits réservés";
+    }
   }
-  
+
+  @media (max-width: 768px) {
+    font-size: 0.8rem;
+    padding: 1rem;
+  }
+}

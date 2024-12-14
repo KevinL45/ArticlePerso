@@ -1,0 +1,39 @@
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="pseudo">Pseudo</label>
+      <input id="pseudo" formControlName="pseudo" type="text">
+      <div *ngIf="userForm.get('pseudo')?.invalid && userForm.get('pseudo')?.touched">
+        <small *ngIf="userForm.get('pseudo')?.errors?.['required']">Pseudo requis</small>
+        <small *ngIf="userForm.get('pseudo')?.errors?.['minlength']">Minimum 3 caractères</small>
+      </div>
+    </div>
+  
+    <div>
+      <label for="email">Email</label>
+      <input id="email" formControlName="email" type="email">
+      <div *ngIf="userForm.get('email')?.invalid && userForm.get('email')?.touched">
+        <small *ngIf="userForm.get('email')?.errors?.['required']">Email requis</small>
+        <small *ngIf="userForm.get('email')?.errors?.['email']">Email invalide</small>
+      </div>
+    </div>
+  
+    <div>
+      <label for="password">Mot de passe</label>
+      <input id="password" formControlName="password" type="password">
+      <div *ngIf="userForm.get('password')?.invalid && userForm.get('password')?.touched">
+        <small *ngIf="userForm.get('password')?.errors?.['required']">Mot de passe requis</small>
+        <small *ngIf="userForm.get('password')?.errors?.['minlength']">Minimum 6 caractères</small>
+      </div>
+    </div>
+  
+    <div>
+      <label for="confirmPassword">Confirmez le mot de passe</label>
+      <input id="confirmPassword" formControlName="confirmPassword" type="password">
+      <div *ngIf="userForm.get('confirmPassword')?.invalid && userForm.get('confirmPassword')?.touched">
+        <small *ngIf="userForm.errors?.['notMatching']">Les mots de passe ne correspondent pas</small>
+      </div>
+    </div>
+  
+    <button type="submit" [disabled]="userForm.invalid">S'inscrire</button>
+  </form>
+  

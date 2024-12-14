@@ -1,20 +1,17 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { AppRoutingModule } from './app.routes'; // Assurez-vous que ce module est bien importé
-import { LayoutComponent } from './layout/layout/layout.component';
-import { HeaderComponent } from './layout/header/header.component';
-import { FooterComponent } from './layout/footer/footer.component';
+import { AppRoutingModule } from './app.routes'; 
+import { ReactiveFormsModule } from '@angular/forms';
+import { UserFormComponent } from './form/user-form/user-form.component';
+
 
 @NgModule({
   declarations: [
-    // LayoutComponent,
-    // HeaderComponent,
-    // FooterComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,  // Importation du module de routage
+    AppRoutingModule,
+    ReactiveFormsModule,
   ],
-  // bootstrap: [LayoutComponent, HeaderComponent, FooterComponent]
 })
 export class AppModule { }
