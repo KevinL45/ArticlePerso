@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { UserService } from '../../services/user.service';
 
 
 @Component({
@@ -13,7 +14,10 @@ import { CommonModule } from '@angular/common';
 export class UserFormComponent {
   userForm: FormGroup;
 
-  constructor(private fb: FormBuilder){
+  constructor(
+    private userService: UserService,
+    private fb: FormBuilder
+  ){
     this.userForm =  this.fb.group({
       pseudo: ['', [Validators.required, Validators.minLength(3)]],
       email: ['', [Validators.required, Validators.email]],
@@ -31,7 +35,14 @@ export class UserFormComponent {
       if (this.userForm.valid) {
         const userData = this.userForm.value;
         console.log('User Data:', userData);
-      
+        this.userService.register(userData).subscribe(
+          (response)=>{
+            console.log('Utilisateur inscrit avec succès:', response);
+          },
+          (error)=>{
+            console.error('Erreur lors de l\'inscription:', error);
+          }
+          )    
               }
 
     

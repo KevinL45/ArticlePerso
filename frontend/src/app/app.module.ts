@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app.routes'; 
 import { ReactiveFormsModule } from '@angular/forms';
-import { UserFormComponent } from './form/user-form/user-form.component';
+import { CommonModule } from '@angular/common';
 
 
 @NgModule({
@@ -12,6 +12,7 @@ import { UserFormComponent } from './form/user-form/user-form.component';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    CommonModule
   ],
 })
 export class AppModule { }

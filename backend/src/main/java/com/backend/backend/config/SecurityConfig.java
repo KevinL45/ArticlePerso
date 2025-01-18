@@ -15,8 +15,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig {
 
         @Autowired
-        @Lazy // Cette annotation permet de résoudre les références circulaires
-
+        @Lazy
         private JwtAuthenticationFilter jwtAuthenticationFilter;
 
         @Bean
