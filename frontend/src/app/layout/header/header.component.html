@@ -7,9 +7,11 @@
     <a routerLink="/connexion">Connexion</a>
     <a routerLink="/inscription">Inscription</a> -->
     <a href="/accueil">Accueil</a>
+    <a href="/">Categorie</a>
     <a href="/article">Article</a>
     <a href="/galerie">Galerie</a>
-    <a href="/connexion">Connexion</a>
-    <a href="/inscription">Inscription</a>
+    <a *ngIf="!isAuthenticated()" href="/connexion">Connexion</a>
+    <a *ngIf="!isAuthenticated()" href="/inscription">Inscription</a>
+    <button *ngIf="isAuthenticated()" (click)="logout()">Déconnexion</button>
   </nav>
 </header>

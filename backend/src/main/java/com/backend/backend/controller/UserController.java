@@ -25,7 +25,7 @@ public class UserController {
             userService.createUser(user);
             return ResponseEntity
                     .status(HttpStatus.CREATED)
-                    .body("Vous etes inscrit, vous pouvez vous connecter ");
+                    .body("");
 
         } catch (IllegalArgumentException ex) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
@@ -41,7 +41,7 @@ public class UserController {
             return ResponseEntity.ok(token);
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                    .body("L'e-mail ou mot de passe sont incorrect, donc le token n'est pas crée");
+                    .body("");
         }
     }
 

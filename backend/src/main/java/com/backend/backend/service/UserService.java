@@ -40,7 +40,6 @@ public class UserService implements UserDetailsService {
             // Création d'un token
             String token = jwtTokenProvider.createToken(user.getEmail());
             return token;
-            // return user;
         }
         return null;
     }
@@ -69,7 +68,7 @@ public class UserService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByEmail(username);
         if (user == null) {
-            throw new UsernameNotFoundException("User not found with username: " + username);
+            throw new UsernameNotFoundException("L'utilisateur n'existe pas: " + username);
         }
         return user;
     }

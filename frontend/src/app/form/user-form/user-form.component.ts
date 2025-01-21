@@ -34,10 +34,9 @@ export class UserFormComponent {
     onSubmit() {
       if (this.userForm.valid) {
         const userData = this.userForm.value;
-        console.log('User Data:', userData);
         this.userService.register(userData).subscribe(
           (response)=>{
-            console.log('Utilisateur inscrit avec succès:', response);
+            console.log('Utilisateur inscrit avec succès:', userData);
           },
           (error)=>{
             console.error('Erreur lors de l\'inscription:', error);
