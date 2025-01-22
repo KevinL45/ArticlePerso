@@ -1,0 +1,24 @@
+<div class="categories-container">
+    <h2>Liste des Catégories</h2>
+  
+    <table class="categories-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nom</th>
+          <th>Option</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let category of categories; let i = index">
+          <td>{{ i }}</td>
+          <td>{{ category.name }}</td>
+          <td>
+            <button class="btn btn-edit" (click)="update(category)">Modifier</button>
+            <button class="btn btn-delete" (click)="remove(category.id)">Supprimer</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
