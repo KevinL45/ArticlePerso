@@ -23,9 +23,7 @@ public class UserController {
     public ResponseEntity<String> addUser(@RequestBody User user) {
         try {
             userService.createUser(user);
-            return ResponseEntity
-                    .status(HttpStatus.CREATED)
-                    .body("");
+            return ResponseEntity.ok("");
 
         } catch (IllegalArgumentException ex) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
