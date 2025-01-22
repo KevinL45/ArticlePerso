@@ -1,3 +1,4 @@
+<app-category-form></app-category-form>
 <div class="categories-container">
     <h2>Liste des Catégories</h2>
   
@@ -6,7 +7,8 @@
         <tr>
           <th>ID</th>
           <th>Nom</th>
-          <th>Option</th>
+          <th>Modifier ?</th>
+          <th>Supprimer ?</th>
         </tr>
       </thead>
       <tbody>
@@ -15,8 +17,10 @@
           <td>{{ category.name }}</td>
           <td>
             <button class="btn btn-edit" (click)="update(category)">Modifier</button>
-            <button class="btn btn-delete" (click)="remove(category.id)">Supprimer</button>
           </td>
+          <td>
+            <button class="btn btn-delete" (click)="remove(category.id)">Supprimer</button>
+        </td>
         </tr>
       </tbody>
     </table>

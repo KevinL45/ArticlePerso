@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class CategoryService {
+  
   private apiUrl = 'http://127.0.0.1:8080/categories/';
 
   constructor(private http: HttpClient, private router: Router) {}
@@ -24,7 +25,9 @@ export class CategoryService {
   }
 
   save(categoryData: any): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}add`, categoryData);
+    const token = localStorage.getItem('token'); // Récupérer le token
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.post<any>(`${this.apiUrl}add`, categoryData, { headers });
   }
 
   delete(id: number): Observable<any> {

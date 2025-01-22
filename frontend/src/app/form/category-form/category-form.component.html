@@ -1,0 +1,12 @@
+<form [formGroup]="categoryForm" (ngSubmit)="save()">
+    <div>
+      <label for="nom">Ajouter une catégorie</label>
+      <input id="nom" formControlName="nom" type="text">
+      <div *ngIf="categoryForm.get('name')?.invalid && categoryForm.get('name')?.touched">
+        <small *ngIf="categoryForm.get('name')?.errors?.['required']">Pseudo requis</small>
+        <small *ngIf="categoryForm.get('name')?.errors?.['minlength']">Minimum 3 caractères</small>
+      </div>
+    </div>
+    <button type="submit" [disabled]="categoryForm.invalid">Ajouter</button>
+  </form>
+  
