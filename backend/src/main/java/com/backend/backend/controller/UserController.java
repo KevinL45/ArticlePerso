@@ -39,7 +39,7 @@ public class UserController {
             return ResponseEntity.ok(token);
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                    .body("");
+                    .body("Email ou mot de passe incorrect");
         }
     }
 

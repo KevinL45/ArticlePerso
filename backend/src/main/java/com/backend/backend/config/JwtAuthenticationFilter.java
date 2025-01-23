@@ -25,27 +25,24 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
 
-        // Récupère le token JWT dans l'en-tête "Authorization"
         String token = request.getHeader("Authorization");
 
+        logger.info("Token : " + token);
         if (token != null && token.startsWith("Bearer ")) {
-            token = token.substring(7); // Supprime le "Bearer " au début du token
-
-            // Valider le token et récupérer le username
+            token = token.substring(7); // Retirer le "Bearer " du début du token
+            logger.info("Validation du token en cours...");
             if (jwtTokenProvider.validateToken(token)) {
                 String username = jwtTokenProvider.getUsernameFromToken(token);
+                logger.info("Utilisateur authentifié : " + username);
 
-                // Récupérer l'utilisateur depuis la base de données
                 UserDetails user = userService.loadUserByUsername(username);
-
                 if (user != null) {
-                    // Créer une authentification basée sur l'utilisateur
-                    UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(user,
-                            null, user.getAuthorities());
-
-                    // L'ajouter au contexte de sécurité de Spring
+                    UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
+                            user, null, user.getAuthorities());
                     SecurityContextHolder.getContext().setAuthentication(authentication);
                 }
+            } else {
+                logger.warn("Token invalide !");
             }
         }
 

@@ -25,8 +25,11 @@ export class CategoryService {
   }
 
   save(categoryData: any): Observable<any> {
-    const token = localStorage.getItem('token'); // Récupérer le token
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    const token = localStorage.getItem('token');
+    console.log("Token : "+token)
+    const headers = {
+      'Authorization': `Bearer ${token}`,
+    };
     return this.http.post<any>(`${this.apiUrl}add`, categoryData, { headers });
   }
 

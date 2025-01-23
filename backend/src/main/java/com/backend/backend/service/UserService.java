@@ -37,7 +37,6 @@ public class UserService implements UserDetailsService {
         User user = userRepository.findByEmail(email);
 
         if (user != null && passwordEncoder.matches(password, user.getPassword())) {
-            // Création d'un token
             String token = jwtTokenProvider.createToken(user.getEmail());
             return token;
         }

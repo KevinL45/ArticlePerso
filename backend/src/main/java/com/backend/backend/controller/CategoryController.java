@@ -22,12 +22,12 @@ public class CategoryController {
 
     @PostMapping("add")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<String> addCategory(@RequestBody Category category) {
+    public ResponseEntity<?> addCategory(@RequestBody Category category) {
         try {
             categoryService.save(category);
             return ResponseEntity.ok("");
         } catch (IllegalArgumentException ex) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(ex.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
         }
     }
 

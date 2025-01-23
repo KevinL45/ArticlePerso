@@ -21,7 +21,7 @@ export class CategoryFormComponent {
     private fb:FormBuilder, 
     private router:Router){
     this.categoryForm = this.fb.group({
-      nom: ['', [Validators.required, Validators.minLength(3)]],
+      name: ['', [Validators.required, Validators.minLength(3)]],
     });
   }
 
@@ -30,7 +30,11 @@ export class CategoryFormComponent {
       const categoryData = this.categoryForm.value;
       this.categoryService.save(categoryData).subscribe(
         (response)=>{
-          console.log('Catégorie ajouté avec succès:', this.categoryForm);
+          console.log('Catégorie ajouté avec succès');
+
+          this.categoryService.categories().subscribe(categories => {
+            console.log('Liste des catégories mise à jour:', categories);
+          });
           this.router.navigate(['/categories']);
         },
         (error)=>{

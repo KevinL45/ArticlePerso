@@ -25,18 +25,21 @@ export class AuthComponent {
 
     onSubmit() {
       if(this.userForm.valid){
-        const token = this.userForm.value;
-        this.userService.login(token).subscribe(
-          (response)=>{
-            console.log('Vous êtes connecté !');
-            localStorage.setItem('token', token);
-            this.router.navigate(['/home']);
+        const userData = this.userForm.value;
+        this.userService.login(userData).subscribe({
+          next: (token: string) => {
+            if (token) {
+              localStorage.setItem('token', token);
+              console.log('Token stocké :', token);
+              this.router.navigate(['/home']);
+            }
           },
-          (error)=>{
-            console.error('Erreur lors de la connexion:', error);
+          error: (err) => {
+            console.error('Erreur lors de la connexion :', err);
           }
-        )
-      }
+        });
+        
+      }}
     }
 
-}
+

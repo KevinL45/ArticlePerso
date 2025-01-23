@@ -3,6 +3,8 @@ package com.backend.backend.config;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.security.Key;
@@ -11,9 +13,10 @@ import java.util.Date;
 @Component
 public class JwtTokenProvider {
 
-    // Utiliser une clé secrète de 256 bits (32 bytes) pour HMAC
-    private String secretKey = "thisisaverysecretkeyforjwtwhichshouldbe256bitlong!";
-    private long validityInMilliseconds = 7200000; // 2 heure
+    @Value("${jwt.secret.key}")
+    private String secretKey;
+
+    private long validityInMilliseconds = 7200000; // 2 heures
 
     // Créer un token JWT à partir des informations utilisateur
     public String createToken(String username) {
@@ -42,9 +45,14 @@ public class JwtTokenProvider {
         try {
             getClaimsFromToken(token);
             return true;
+        } catch (io.jsonwebtoken.SignatureException e) {
+            System.out.println("Signature invalide : " + e.getMessage());
+        } catch (io.jsonwebtoken.ExpiredJwtException e) {
+            System.out.println("Token expiré : " + e.getMessage());
         } catch (Exception e) {
-            return false;
+            System.out.println("Erreur lors de la validation du token : " + e.getMessage());
         }
+        return false;
     }
 
     // Extraire les informations de la charge utile du token

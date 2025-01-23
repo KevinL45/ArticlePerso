@@ -35,7 +35,6 @@ public class SecurityConfig {
                                                                 "/galleries/list", "/galleries/details/{id}")
                                                 .permitAll()
                                                 .anyRequest().authenticated())
-
                                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
                 return http.build();
