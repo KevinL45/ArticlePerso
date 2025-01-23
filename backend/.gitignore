@@ -33,7 +33,10 @@ build/
 .vscode/
 
 ### Secret key ###
-/src/main/resources/application.properties
-/backend/src/main/resources/application.properties
-/backend/src/main/java/com/backend/backend/utils/SecretKeyGenerator.class
-/backend/src/main/java/com/backend/backend/utils/SecretKeyGenerator.java
+/src/main/java/com/backend/backend/utils/SecretKeyGenerator.class
+/src/main/java/com/backend/backend/utils/SecretKeyGenerator.java
+
+### env ###
+.env
+
+
