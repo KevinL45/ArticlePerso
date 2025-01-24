@@ -2,6 +2,11 @@ package com.backend.backend.controller;
 
 import com.backend.backend.model.User;
 import com.backend.backend.service.UserService;
+
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,14 +37,19 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@Validated @RequestBody User user) {
+    public ResponseEntity<Map<String, Object>> login(@Validated @RequestBody User user) {
         String token = userService.authenticateUser(user.getEmail(), user.getPassword());
 
         if (token != null) {
-            return ResponseEntity.ok(token);
+            User userConnected = userService.getUser(user.getEmail());
+            Map<String, Object> response = new HashMap<>();
+
+            response.put("token", token);
+            response.put("userId", userConnected.getId());
+            return ResponseEntity.ok(response);
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                    .body("Email ou mot de passe incorrect");
+                    .body(Collections.singletonMap("error", "Email ou mot de passe incorrect"));
         }
     }
 

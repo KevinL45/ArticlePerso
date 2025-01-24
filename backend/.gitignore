@@ -35,6 +35,7 @@ build/
 ### Secret key ###
 /src/main/java/com/backend/backend/utils/SecretKeyGenerator.class
 /src/main/java/com/backend/backend/utils/SecretKeyGenerator.java
+/src/main/resources/application.properties
 
 ### env ###
 .env
