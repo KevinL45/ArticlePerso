@@ -7,7 +7,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class UserService {
-  private apiUrl = "http://127.0.0.1:8080/users/"
+  private apiUrl = "http://127.0.0.1:8080/users/";
+  private id: number | null = null;
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -19,14 +20,31 @@ export class UserService {
     return !!localStorage.getItem('token'); // Vérifie si le token est présent
   }
 
-  login(userData: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}login`, userData,{
-      responseType: 'text' as 'json'
-    });
-    
+  login(userData: any): Observable<{ token: string, userId: number }> {
+    return this.http.post<{ token: string, userId: number }>(`${this.apiUrl}login`, userData);
   }
   logout() {
     localStorage.removeItem('token');
+    localStorage.removeItem('userId');
     this.router.navigate(['/home']);
+  }
+
+  setIdUser(id: string): void {
+    localStorage.setItem('userId',id)
+  
+  }
+
+  getIdUser(){
+    return localStorage.getItem('userId')
+  }
+
+  
+  setToken(token: string): void {
+    localStorage.setItem('token',token)
+  
+  }
+
+  getToken(){
+    return localStorage.getItem('token')
   }
 }

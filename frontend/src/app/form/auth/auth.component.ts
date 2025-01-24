@@ -24,13 +24,19 @@ export class AuthComponent {
     })}
 
     onSubmit() {
-      if(this.userForm.valid){
+      if (this.userForm.valid) {
         const userData = this.userForm.value;
+    
         this.userService.login(userData).subscribe({
-          next: (token: string) => {
-            if (token) {
-              localStorage.setItem('token', token);
+          next: (response) => {
+            // Récupérer le token et l'ID de l'utilisateur
+            const { token, userId } = response;
+    
+            if (token && userId) {
+              this.userService.setIdUser(userId.toString())
+              this.userService.setToken(token)
               console.log('Token stocké :', token);
+              console.log('ID utilisateur stocké :', userId);
               this.router.navigate(['/home']);
             }
           },
@@ -38,8 +44,9 @@ export class AuthComponent {
             console.error('Erreur lors de la connexion :', err);
           }
         });
-        
-      }}
+      }
+    }
+    
     }
 
 

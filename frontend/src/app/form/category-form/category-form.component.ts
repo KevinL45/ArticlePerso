@@ -49,6 +49,10 @@ export class CategoryFormComponent {
 
   }
 
+  remove(){
+
+  }
+
 
 
 }

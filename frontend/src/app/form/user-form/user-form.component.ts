@@ -23,7 +23,8 @@ export class UserFormComponent {
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', [Validators.required]]
-    }, { validators: this.passwordsMatch });}
+    }, { validators: this.passwordsMatch });
+  }
     
     passwordsMatch(group: FormGroup) {
       const password = group.get('password')?.value;

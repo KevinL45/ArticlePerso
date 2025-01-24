@@ -1,0 +1,47 @@
+<form [formGroup]="articleForm" (ngSubmit)="save()">
+    <!-- Titre -->
+    <div>
+      <label for="title">Titre de l'article</label>
+      <input id="title" formControlName="title" type="text">
+      <div *ngIf="articleForm.get('title')?.invalid && articleForm.get('title')?.touched">
+        <small *ngIf="articleForm.get('title')?.errors?.['required']">Le titre est requis</small>
+        <small *ngIf="articleForm.get('title')?.errors?.['minlength']">Minimum 3 caractères</small>
+      </div>
+    </div>
+  
+    <!-- Description -->
+    <div>
+      <label for="description">Description</label>
+      <textarea id="description" formControlName="description"></textarea>
+      <div *ngIf="articleForm.get('description')?.invalid && articleForm.get('description')?.touched">
+        <small *ngIf="articleForm.get('description')?.errors?.['required']">La description est requise</small>
+        <small *ngIf="articleForm.get('description')?.errors?.['minlength']">Minimum 10 caractères</small>
+      </div>
+    </div>
+  
+    <!-- Image -->
+    <div>
+      <label for="image">Image</label>
+      <input id="image" type="file" (change)="onFileChange($event)">
+      <div *ngIf="articleForm.get('image')?.invalid && articleForm.get('image')?.touched">
+        <small *ngIf="articleForm.get('image')?.errors?.['required']">Une image est requise</small>
+      </div>
+    </div>
+  
+    <!-- Catégorie -->
+    <div>
+      <label for="category_id">Catégorie</label>
+      <select id="category_id" formControlName="category_id">
+        <option *ngFor="let category of categories" [value]="category.id">
+          {{ category.name }}
+        </option>
+      </select>
+      <div *ngIf="articleForm.get('category_id')?.invalid && articleForm.get('category_id')?.touched">
+        <small *ngIf="articleForm.get('category_id')?.errors?.['required']">La catégorie est requise</small>
+      </div>
+    </div>
+  
+    <!-- Bouton de soumission -->
+    <button type="submit" [disabled]="articleForm.invalid">Ajouter l'article</button>
+  </form>
+  
