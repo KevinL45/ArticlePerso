@@ -1,1 +1,42 @@
-<p>gallery-form works!</p>
+<form [formGroup]="galleryForm" (ngSubmit)="save()">
+  <!-- Nom -->
+  <div>
+    <label for="name">Nom</label>
+    <input id="name" formControlName="name" type="text" />
+    <div *ngIf="galleryForm.get('name')?.invalid && galleryForm.get('name')?.touched">
+      <small *ngIf="galleryForm.get('name')?.errors?.['required']">Le nom est requis.</small>
+      <small *ngIf="galleryForm.get('name')?.errors?.['minlength']">Minimum 3 caractères.</small>
+    </div>
+  </div>
+
+  <!-- Description -->
+  <div>
+    <label for="description">Description</label>
+    <textarea id="description" formControlName="description"></textarea>
+    <div *ngIf="galleryForm.get('description')?.invalid && galleryForm.get('description')?.touched">
+      <small *ngIf="galleryForm.get('description')?.errors?.['required']">La description est requise.</small>
+      <small *ngIf="galleryForm.get('description')?.errors?.['minlength']">Minimum 10 caractères.</small>
+    </div>
+  </div>
+
+  <!-- Logo -->
+  <div>
+    <label for="logo">Logo</label>
+    <input id="logo" type="file" (change)="onFileChange($event, 'logo')" />
+    <div *ngIf="galleryForm.get('logo')?.invalid && galleryForm.get('logo')?.touched">
+      <small *ngIf="galleryForm.get('logo')?.errors?.['required']">Un logo est requis.</small>
+    </div>
+  </div>
+
+  <!-- Arrière-plan -->
+  <div>
+    <label for="background">Arrière-plan</label>
+    <input id="background" type="file" (change)="onFileChange($event, 'background')" />
+    <div *ngIf="galleryForm.get('background')?.invalid && galleryForm.get('background')?.touched">
+      <small *ngIf="galleryForm.get('background')?.errors?.['required']">Une image d'arrière-plan est requise.</small>
+    </div>
+  </div>
+
+  <!-- Bouton de soumission -->
+  <button type="submit" [disabled]="galleryForm.invalid">Ajouter une galerie</button>
+</form>

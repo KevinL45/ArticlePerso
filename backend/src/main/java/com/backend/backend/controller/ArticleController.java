@@ -28,7 +28,7 @@ public class ArticleController {
             articleService.save(article);
             return ResponseEntity
                     .status(HttpStatus.CREATED)
-                    .body("L'article a été crée");
+                    .body("");
         } catch (IllegalArgumentException ex) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
         }
