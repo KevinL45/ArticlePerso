@@ -12,14 +12,15 @@ import com.backend.backend.model.Article;
 
 import org.springframework.web.bind.annotation.*;
 
+@RestController
+@RequestMapping("/articles")
 public class ArticleController {
+
+    public ArticleController() {
+    }
 
     @Autowired
     private ArticleService articleService;
-
-    public ArticleController(ArticleService articleService) {
-        this.articleService = articleService;
-    }
 
     @PostMapping("add")
     @ResponseStatus(HttpStatus.CREATED)

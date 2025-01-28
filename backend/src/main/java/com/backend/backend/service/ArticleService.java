@@ -10,11 +10,14 @@ import java.util.Optional;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ArticleService {
 
     @Autowired
     private ArticleRespoitory articleRespoitory;
+
     private Date now = Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant());
 
     public Article save(Article article) {
