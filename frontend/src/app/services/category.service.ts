@@ -26,9 +26,9 @@ export class CategoryService {
   }
 
   save(categoryData: any): Observable<any> {
-    const token = this.userService.getToken();
+ 
     const headers = {
-      'Authorization': `Bearer ${token}`,
+      'Authorization': `Bearer ${this.userService.getToken()}`,
     };
     return this.http.post<any>(`${this.apiUrl}add`, categoryData, { headers });
   }

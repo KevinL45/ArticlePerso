@@ -24,10 +24,9 @@ export class ArticleService {
   }
 
   save(articleData: any): Observable<any> {
-    const token = this.userService.getToken();
-    console.log(token)
+    
     const headers = {
-      'Authorization': `Bearer ${token}`,
+      'Authorization': `Bearer ${this.userService.getToken()}`,
       
     };
     return this.http.post<any>(`${this.apiUrl}add`, articleData, { headers });

@@ -29,7 +29,7 @@ export class ArticleFormComponent implements OnInit {
       description: ['', [Validators.required, Validators.minLength(10)]],
       image_url: ['', [Validators.required]],
       category_id: [null, [Validators.required]],
-      user_id: [this.userService.getIdUser(), Validators.required],
+      user_id: [18, Validators.required],
       created_date: [new Date().toISOString()],
       updated_date: [new Date().toISOString()],
       delete_date: [null],
