@@ -36,6 +36,11 @@ public class UserController {
         }
     }
 
+    @GetMapping("details/{id}")
+    public User getUserById(@PathVariable Long id) {
+        return userService.getUserById(id);
+    }
+
     @PostMapping("/login")
     public ResponseEntity<Map<String, Object>> login(@Validated @RequestBody User user) {
         String token = userService.authenticateUser(user.getEmail(), user.getPassword());

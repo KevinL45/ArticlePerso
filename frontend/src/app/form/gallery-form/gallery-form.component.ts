@@ -26,7 +26,7 @@ export class GalleryFormComponent {
       description: ['', [Validators.required, Validators.minLength(10)]],
       logo: ['', [Validators.required]],
       background: ['', [Validators.required]],
-      user_id: [this.userService.getIdUser(), Validators.required],
+      user_id: [this.userService.getUserCurrent(), Validators.required],
       created_date: [new Date().toISOString()],
       updated_date: [new Date().toISOString()],
       delete_date: [null],

@@ -5,6 +5,9 @@ import { Router } from '@angular/router';
 import { CategoryService } from '../../services/category.service';
 import { CommonModule } from '@angular/common';
 import { UserService } from '../../services/user.service';
+import { Article } from '../../models/Article';
+import { Category } from '../../models/Category';
+import { User } from '../../models/User';
 
 @Component({
   selector: 'app-article-form',
@@ -15,7 +18,8 @@ import { UserService } from '../../services/user.service';
 })
 export class ArticleFormComponent implements OnInit {
   articleForm: FormGroup;
-  categories: any[] = [];
+  categories: Category[] = [];
+  user: User | null = null;
 
   constructor(
     private categoryService: CategoryService,
@@ -29,15 +33,12 @@ export class ArticleFormComponent implements OnInit {
       description: ['', [Validators.required, Validators.minLength(10)]],
       image_url: ['', [Validators.required]],
       category: [null, [Validators.required]],
-      user: [userService.getIdUser(), Validators.required],
-      created_date: [''],
-      updated_date: [''],
-      delete_date: [''],
     });
   }
 
   ngOnInit(): void {
     this.loadCategories();
+    this.loadUser();
   }
 
   loadCategories(): void {
@@ -49,6 +50,20 @@ export class ArticleFormComponent implements OnInit {
         console.error('Erreur lors du chargement des catégories :', error);
       }
     );
+  }
+
+  loadUser(): void {
+    const userId = Number(this.userService.getUserCurrent());
+    if (userId) {
+      this.userService.findUser(userId).subscribe(
+        (userData) => {
+          this.user = userData;
+        },
+        (error) => {
+          console.error('Erreur lors de la récupération de l\'utilisateur :', error);
+        }
+      );
+    }
   }
 
   onFileChange(event: Event): void {
@@ -74,12 +89,26 @@ export class ArticleFormComponent implements OnInit {
   }
 
   save(): void {
-    if (this.articleForm.valid) {
-      const articleData = this.articleForm.value;
-      console.log('Données de l\'article :', articleData);
+    if (this.articleForm.valid && this.user) {
+      const selectedCategory = this.categories.find(cat => cat.id === Number(this.articleForm.value.category));
+      console.log(selectedCategory)
+      if (!selectedCategory) {
+        console.warn('Catégorie invalide');
+        return;
+      }
+
+      const articleData = new Article(
+        this.articleForm.value.title,
+        this.articleForm.value.description,
+        this.articleForm.value.image_url,
+        selectedCategory, 
+        this.user
+      );
+
+      console.log('Données envoyées à l\'API :', articleData);
 
       this.articleService.save(articleData).subscribe(
-        (response) => {
+        () => {
           console.log('Article ajouté avec succès');
           this.router.navigate(['/articles']);
         },
@@ -88,7 +117,7 @@ export class ArticleFormComponent implements OnInit {
         }
       );
     } else {
-      console.warn('Le formulaire est invalide. Veuillez corriger les erreurs.');
+      console.warn('Le formulaire est invalide ou l\'utilisateur est introuvable.');
     }
   }
 }

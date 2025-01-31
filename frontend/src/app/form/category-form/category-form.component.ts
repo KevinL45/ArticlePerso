@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { CommonModule } from '@angular/common';
 import { CategoryService } from '../../services/category.service';
 import { Route, Router } from '@angular/router';
+import { Category } from '../../models/Category';
 
 
 @Component({
@@ -27,7 +28,9 @@ export class CategoryFormComponent {
 
   save(){
     if (this.categoryForm.valid) {
-      const categoryData = this.categoryForm.value;
+      const categoryData = new Category(
+        this.categoryForm.value.name
+      )
       this.categoryService.save(categoryData).subscribe(
         (response)=>{
           console.log('Catégorie ajouté avec succès');

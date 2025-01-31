@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { User } from '../models/User';
 
 @Injectable({
   providedIn: 'root'
@@ -12,15 +13,15 @@ export class UserService {
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  register(userData: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}add`, userData);
+  register(userData: User): Observable<User> {
+    return this.http.post<User>(`${this.apiUrl}add`, userData);
   }
 
   isAuthenticated(): boolean {
     return !!localStorage.getItem('token'); // Vérifie si le token est présent
   }
 
-  login(userData: any): Observable<{ token: string, userId: number }> {
+  login(userData: User): Observable<{ token: string, userId: number }> {
     return this.http.post<{ token: string, userId: number }>(`${this.apiUrl}login`, userData);
   }
   logout() {
@@ -29,15 +30,14 @@ export class UserService {
     this.router.navigate(['/home']);
   }
 
-  setIdUser(id: string): void {
+  setUserCurrent(id: string): void {
     localStorage.setItem('userId',id)
   
   }
 
-  getIdUser(){
+  getUserCurrent(){
     return localStorage.getItem('userId')
   }
-
   
   setToken(token: string): void {
     localStorage.setItem('token',token)
@@ -46,5 +46,12 @@ export class UserService {
 
   getToken(){
     return localStorage.getItem('token')
+  }
+
+  findUser(id: number): Observable<User> {
+    const headers = {
+      'Authorization': `Bearer ${this.getToken()}`,
+    };
+    return this.http.get<User>(`${this.apiUrl}details/${id}`,{headers});
   }
 }

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { UserService } from './user.service';
+import { Article } from '../models/Article';
 
 @Injectable({
   providedIn: 'root',
@@ -11,28 +12,28 @@ export class ArticleService {
 
   constructor(private http: HttpClient, private userService:UserService) {}
 
-  articles(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}list`);
+  articles(): Observable<Article[]> {
+    return this.http.get<Article[]>(`${this.apiUrl}list`);
   }
 
-  article(id: number): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}details/${id}`);
+  article(id: number): Observable<Article> {
+    return this.http.get<Article>(`${this.apiUrl}details/${id}`);
   }
 
-  update(id: number, articleData: any): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}update/${id}`, articleData);
+  update(id: number, articleData: Article): Observable<Article> {
+    return this.http.put<Article>(`${this.apiUrl}update/${id}`, articleData);
   }
 
-  save(articleData: any): Observable<any> {
+  save(articleData: Article): Observable<Article> {
     
     const headers = {
       'Authorization': `Bearer ${this.userService.getToken()}`,
       
     };
-    return this.http.post<any>(`${this.apiUrl}add`, articleData, { headers });
+    return this.http.post<Article>(`${this.apiUrl}add`, articleData, { headers });
   }
 
-  delete(id: number): Observable<any> {
-    return this.http.delete<any>(`${this.apiUrl}delete/${id}`);
+  delete(id: number): Observable<Article> {
+    return this.http.delete<Article>(`${this.apiUrl}delete/${id}`);
   }
 }

@@ -2,18 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import { CategoryService } from '../../services/category.service';
 import { FormBuilder } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { CategoryFormComponent } from '../../form/category-form/category-form.component';
+import { Category } from '../../models/Category';
 
 
 @Component({
   selector: 'app-category',
-  imports: [CommonModule, CategoryFormComponent],
+  imports: [CommonModule],
   templateUrl: './category.component.html',
   styleUrl: './category.component.scss'
 })
 export class CategoryComponent implements OnInit{
 
-  categories: any[] = []; 
+  categories: Category[] = []; 
 
   constructor(private categoryService: CategoryService, private fb:FormBuilder){}
   
@@ -32,7 +32,7 @@ export class CategoryComponent implements OnInit{
     );
   }
 
-  update(category: any){
+  update(category: Category){
 
   }
 

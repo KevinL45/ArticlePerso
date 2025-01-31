@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { UserService } from '../../services/user.service';
+import { User } from '../../models/User';
 
 
 @Component({
@@ -34,7 +35,11 @@ export class UserFormComponent {
 
     onSubmit() {
       if (this.userForm.valid) {
-        const userData = this.userForm.value;
+        const userData = new User(
+          this.userForm.value.email,
+          this.userForm.value.password,
+          this.userForm.value.pseudo
+        );
         this.userService.register(userData).subscribe(
           (response)=>{
             console.log('Utilisateur inscrit avec succès:', userData);

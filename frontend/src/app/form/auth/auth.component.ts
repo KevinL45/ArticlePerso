@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { CommonModule } from '@angular/common';
 import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router'; 
+import { User } from '../../models/User';
 
 @Component({
   selector: 'app-auth',
@@ -25,7 +26,10 @@ export class AuthComponent {
 
     onSubmit() {
       if (this.userForm.valid) {
-        const userData = this.userForm.value;
+        const userData = new User(
+          this.userForm.value.email,
+          this.userForm.value.password
+        )
     
         this.userService.login(userData).subscribe({
           next: (response) => {
@@ -33,7 +37,7 @@ export class AuthComponent {
             const { token, userId } = response;
     
             if (token && userId) {
-              this.userService.setIdUser(userId.toString())
+              this.userService.setUserCurrent(userId.toString())
               this.userService.setToken(token)
               console.log('Token stocké :', token);
               console.log('ID utilisateur stocké :', userId);

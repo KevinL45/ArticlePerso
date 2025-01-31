@@ -49,7 +49,8 @@ public class SecurityConfig {
                                                                 "categories/delete/{id}",
                                                                 "galleries/add",
                                                                 "galleries/update/{id}",
-                                                                "galleries/delete/{id}")
+                                                                "galleries/delete/{id}",
+                                                                "users/details/{id}")
                                                 .authenticated())
                                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
