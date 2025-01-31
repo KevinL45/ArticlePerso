@@ -1,6 +1,8 @@
 <header class="header">
   <div class="logo">
-    <img src="../../../assets/images/frocus.png" alt="Logo Frocus" width="50" height="50"/>
+    <a href="/accueil">
+      <img src="../../../assets/images/frocus.png" alt="Logo Frocus" width="50" height="50"/>
+    </a>
   </div>
   <nav>
     <!-- <a routerLink="/accueil">Accueil</a>
@@ -8,12 +10,30 @@
     <a routerLink="/galerie">Galerie</a>
     <a routerLink="/connexion">Connexion</a>
     <a routerLink="/inscription">Inscription</a> -->
-    <a href="/accueil">Accueil</a>
-    <a href="/categories">Categories</a>
-    <a href="/articles">Articles</a>
-    <a href="/galerie">Galerie</a>
+     
+    <div class="dropdown">
+      <a href="/articles" class="dropbtn">Articles</a>
+      <div *ngIf="isAuthenticated()"class="dropdown-content">
+        <a href="/articles/creation">Crée un article</a>
+      </div>
+    </div>
+    
+    <div class="dropdown">
+      <a href="/galerie" class="dropbtn">Galerie</a>
+      <div *ngIf="isAuthenticated()"class="dropdown-content">
+        <a href="/galerie/creation">Crée une galerie</a>
+      </div>
+    </div>   
+
+    <div class="dropdown">
+      <a href="/categories" class="dropbtn">Catégories</a>
+      <div *ngIf="isAuthenticated()" class="dropdown-content">
+        <a href="/categories/creation">Crée une catégorie</a>
+      </div>
+    </div>    
+ 
     <a *ngIf="!isAuthenticated()" href="/connexion">Connexion</a>
-    <a *ngIf="!isAuthenticated()" href="/inscription">Inscription</a>
+    <!-- <a *ngIf="!isAuthenticated()" href="/inscription">Inscription</a> -->
     <button class="btn btn-delete" *ngIf="isAuthenticated()" (click)="logout()">Déconnexion</button>
   </nav>
 </header>

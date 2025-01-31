@@ -21,8 +21,11 @@ public class ArticleService {
     private Date now = Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant());
 
     public Article save(Article article) {
+        System.out.println("User ID : " + article.getUser().getId());
+        System.out.println("Category ID : " + article.getCategory().getId());
         article.setCreatedDate(now);
         article.setUpdatedDate(now);
+        article.setDeletedDate(null);
         return articleRespoitory.save(article);
     }
 

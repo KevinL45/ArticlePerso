@@ -30,15 +30,15 @@
 
   <!-- Catégorie -->
   <div>
-    <label for="category_id">Catégorie</label>
-    <select id="category_id" formControlName="category_id">
+    <label for="category">Catégorie</label>
+    <select id="category" formControlName="category">
       <option value="" disabled>-- Sélectionnez une catégorie --</option>
       <option *ngFor="let category of categories" [value]="category.id">
         {{ category.name }}
       </option>
     </select>
-    <div *ngIf="articleForm.get('category_id')?.invalid && articleForm.get('category_id')?.touched">
-      <small *ngIf="articleForm.get('category_id')?.errors?.['required']">La catégorie est requise.</small>
+    <div *ngIf="articleForm.get('category')?.invalid && articleForm.get('category')?.touched">
+      <small *ngIf="articleForm.get('category')?.errors?.['required']">La catégorie est requise.</small>
     </div>
   </div>
 

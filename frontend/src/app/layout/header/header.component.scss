@@ -16,6 +16,7 @@
     gap: 1.5rem;
     font-family: Arial;
     font-weight: bold;
+    position: relative;
 
     @media (max-width: 768px) {
       flex-wrap: wrap;
@@ -31,6 +32,42 @@
 
       &:hover {
         color: #007bff; /* Couleur d'accentuation au survol */
+      }
+    }
+
+    /* Styles du menu déroulant */
+    .dropdown {
+      position: relative;
+
+      .dropbtn {
+        cursor: pointer;
+      }
+
+      .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: white;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+        min-width: 160px;
+        z-index: 1000;
+
+        a {
+          display: block;
+          padding: 10px;
+          text-align: left;
+          color: black;
+          font-size: 0.9rem;
+          text-decoration: none;
+
+          &:hover {
+            background-color: #f1f1f1;
+          }
+        }
+      }
+
+      &:hover .dropdown-content {
+        display: block; /* Affiche le sous-menu au survol */
       }
     }
 

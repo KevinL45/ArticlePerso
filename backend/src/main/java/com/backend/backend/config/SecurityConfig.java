@@ -29,12 +29,28 @@ public class SecurityConfig {
                 http.csrf(AbstractHttpConfigurer::disable)
                                 .cors(cors -> cors.configurationSource(corsConfigurationSource())) // CORS
                                 .authorizeHttpRequests(auth -> auth
-                                                .requestMatchers("/", "/users/login", "/users/add", "/categories/list",
-                                                                "/categories/details/{id}", "/articles/list",
+                                                .requestMatchers(
+                                                                "/",
+                                                                "/users/login",
+                                                                "/users/add",
+                                                                "/categories/list",
+                                                                "/categories/details/{id}",
+                                                                "/articles/list",
                                                                 "/articles/details/{id}",
-                                                                "/galleries/list", "/galleries/details/{id}")
+                                                                "/galleries/list",
+                                                                "/galleries/details/{id}")
                                                 .permitAll()
-                                                .anyRequest().authenticated())
+                                                .requestMatchers(
+                                                                "/articles/add",
+                                                                "articles/update/{id}",
+                                                                "articles/delete/{id}",
+                                                                "categories/add",
+                                                                "categories/update/{id}",
+                                                                "categories/delete/{id}",
+                                                                "galleries/add",
+                                                                "galleries/update/{id}",
+                                                                "galleries/delete/{id}")
+                                                .authenticated())
                                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
                 return http.build();
