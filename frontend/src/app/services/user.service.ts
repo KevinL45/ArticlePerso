@@ -18,7 +18,7 @@ export class UserService {
   }
 
   isAuthenticated(): boolean {
-    return !!localStorage.getItem('token'); // Vérifie si le token est présent
+    return !!localStorage.getItem('token');
   }
 
   login(userData: User): Observable<{ token: string, userId: number }> {
@@ -53,5 +53,14 @@ export class UserService {
       'Authorization': `Bearer ${this.getToken()}`,
     };
     return this.http.get<User>(`${this.apiUrl}details/${id}`,{headers});
+  }
+  loadUser(): void {
+     if (this.isAuthenticated()){
+      console.log("Vous êtes connecté !")
+     }else{
+      this.router.navigate(['/home'])
+      console.log("Vous êtes pas connecté ! Retour à la page d'accueil.")
+     }
+    
   }
 }

@@ -1,24 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { CategoryService } from '../../services/category.service';
-import { FormBuilder } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Category } from '../../models/Category';
-
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-category',
-  imports: [CommonModule],
+  standalone: true,
+  imports:[CommonModule],
   templateUrl: './category.component.html',
-  styleUrl: './category.component.scss'
+  styleUrls: ['./category.component.scss']
 })
-export class CategoryComponent implements OnInit{
+export class CategoryComponent implements OnInit {
+  categories: Category[] = [];
 
-  categories: Category[] = []; 
+  constructor(private categoryService: CategoryService, private userService: UserService) {}
 
-  constructor(private categoryService: CategoryService, private fb:FormBuilder){}
-  
-  ngOnInit():void{
-    this.allCategories()
+  ngOnInit(): void {
+    this.allCategories();
   }
 
   allCategories(): void {
@@ -32,12 +31,19 @@ export class CategoryComponent implements OnInit{
     );
   }
 
-  update(category: Category){
-
+  isAuthenticated(): boolean {
+    return this.userService.isAuthenticated();
   }
 
-  remove(id: number) : void{
-
+  updateCategory(category: Category) {
+    console.log('Modification de la catégorie :', category);
   }
 
+  removeCategory(id: number): void {
+    if (confirm('Voulez-vous vraiment supprimer cette catégorie ?')) {
+      this.categoryService.delete(id).subscribe(() => {
+        this.categories = this.categories.filter(category => category.id !== id);
+      });
+    }
+  }
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { GalleryService } from '../../services/gallery.service';
@@ -12,7 +12,7 @@ import { ReactiveFormsModule } from '@angular/forms';
   templateUrl: './gallery-form.component.html',
   styleUrls: ['./gallery-form.component.scss'],
 })
-export class GalleryFormComponent {
+export class GalleryFormComponent implements OnInit{
   galleryForm: FormGroup;
 
   constructor(
@@ -31,6 +31,10 @@ export class GalleryFormComponent {
       updated_date: [new Date().toISOString()],
       delete_date: [null],
     });
+  }
+
+  ngOnInit(): void {
+    this.userService.loadUser();
   }
 
   save(): void {

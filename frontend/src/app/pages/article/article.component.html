@@ -1,0 +1,27 @@
+<div class="articles-container">
+    <div class="article-card" *ngFor="let article of paginatedArticles">
+      <!-- <img [src]="article.imageUrl" alt="{{ article.title }}" class="article-image" /> -->
+      <img src="../../../assets/images/background.png" alt="{{ article.title }}" class="article-image" />
+      <div class="article-content">
+        <h2>{{ article.title }}</h2>
+        <p class="article-date">{{ article.createdDate | date: 'dd/MM/yyyy' }}</p>
+        <p class="article-description">
+          {{ article.description.length > 100 ? (article.description | slice:0:100) + '...' : article.description }}
+        </p>
+        <div class="article-actions">
+          <button *ngIf="isAuthenticated()" class="btn btn-primary" (click)="updateArticle(article)">Modifier</button>
+          <button *ngIf="isAuthenticated()" class="btn btn-danger">Supprimer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Pagination -->
+  <div class="pagination">
+    <button *ngFor="let page of (articles.length / articlesPerPage | ceil) | array"
+            (click)="changePage(page)"
+            [class.active]="currentPage === page">
+      {{ page }}
+    </button>
+  </div>
+  

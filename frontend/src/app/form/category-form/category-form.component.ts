@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { CategoryService } from '../../services/category.service';
 import { Route, Router } from '@angular/router';
 import { Category } from '../../models/Category';
+import { UserService } from '../../services/user.service';
 
 
 @Component({
@@ -13,14 +14,19 @@ import { Category } from '../../models/Category';
   templateUrl: './category-form.component.html',
   styleUrl: './category-form.component.scss',
 })
-export class CategoryFormComponent {
+export class CategoryFormComponent implements OnInit{
   
   categoryForm: FormGroup;
+
+  ngOnInit(): void {
+    this.userService.loadUser();
+  }
 
   constructor(
     private categoryService: CategoryService, 
     private fb:FormBuilder, 
-    private router:Router){
+    private router:Router,
+    private userService: UserService){
     this.categoryForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(3)]],
     });
@@ -45,14 +51,6 @@ export class CategoryFormComponent {
         }
         )    
             }
-
-  }
-
-  update(){
-
-  }
-
-  remove(){
 
   }
 

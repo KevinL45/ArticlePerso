@@ -26,7 +26,7 @@ export class ArticleFormComponent implements OnInit {
     private articleService: ArticleService,
     private fb: FormBuilder,
     private router: Router,
-    private userService: UserService
+    private userService: UserService,
   ) {
     this.articleForm = this.fb.group({
       title: ['', [Validators.required, Validators.minLength(3)]],
@@ -38,7 +38,7 @@ export class ArticleFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadCategories();
-    this.loadUser();
+    this.userService.loadUser();
   }
 
   loadCategories(): void {
@@ -53,17 +53,7 @@ export class ArticleFormComponent implements OnInit {
   }
 
   loadUser(): void {
-    const userId = Number(this.userService.getUserCurrent());
-    if (userId) {
-      this.userService.findUser(userId).subscribe(
-        (userData) => {
-          this.user = userData;
-        },
-        (error) => {
-          console.error('Erreur lors de la récupération de l\'utilisateur :', error);
-        }
-      );
-    }
+    return this.userService.loadUser();
   }
 
   onFileChange(event: Event): void {
