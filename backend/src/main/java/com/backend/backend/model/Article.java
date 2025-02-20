@@ -11,6 +11,8 @@ import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 public class Article {
 
@@ -29,10 +31,12 @@ public class Article {
 
     @ManyToOne
     @JoinColumn(name = "category_id", nullable = false)
+    @JsonBackReference("category-articles")
     private Category category;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
+    @JsonBackReference("user-articles")
     private User user;
 
     @Temporal(TemporalType.TIMESTAMP)

@@ -31,7 +31,7 @@ export class ArticleFormComponent implements OnInit {
     this.articleForm = this.fb.group({
       title: ['', [Validators.required, Validators.minLength(3)]],
       description: ['', [Validators.required, Validators.minLength(10)]],
-      image_url: ['', [Validators.required]],
+      imageUrl: ['', [Validators.required]],
       category: [null, [Validators.required]],
     });
   }
@@ -68,25 +68,19 @@ export class ArticleFormComponent implements OnInit {
 
   onFileChange(event: Event): void {
     const input = event.target as HTMLInputElement;
-
+  
     if (input && input.files && input.files.length > 0) {
       const file = input.files[0];
-      const reader = new FileReader();
+  
+      const formData = new FormData();
+      formData.append("file", file);
 
-      reader.onload = () => {
-        const base64String = reader.result as string;
-        this.articleForm.patchValue({
-          image_url: base64String,
-        });
-      };
-
-      reader.onerror = (error) => {
-        console.error('Erreur lors de la lecture du fichier :', error);
-      };
-
-      reader.readAsDataURL(file);
+          this.articleForm.patchValue({
+            imageUrl: "ok", // On stocke juste l'URL retournée
+          });
     }
   }
+  
 
   save(): void {
     if (this.articleForm.valid && this.user) {
@@ -100,7 +94,7 @@ export class ArticleFormComponent implements OnInit {
       const articleData = new Article(
         this.articleForm.value.title,
         this.articleForm.value.description,
-        this.articleForm.value.image_url,
+        this.articleForm.value.imageUrl,
         selectedCategory, 
         this.user
       );

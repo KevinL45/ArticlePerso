@@ -21,10 +21,10 @@
 
   <!-- Image -->
   <div>
-    <label for="image_url">Image</label>
-    <input id="image_url" type="file" (change)="onFileChange($event)" />
-    <div *ngIf="articleForm.get('image_url')?.invalid && articleForm.get('image_url')?.touched">
-      <small *ngIf="articleForm.get('image_url')?.errors?.['required']">Une image est requise.</small>
+    <label for="imageUrl">Image</label>
+    <input id="imageUrl" type="file" (change)="onFileChange($event)" />
+    <div *ngIf="articleForm.get('imageUrl')?.invalid && articleForm.get('imageUrl')?.touched">
+      <small *ngIf="articleForm.get('imageUrl')?.errors?.['required']">Une image est requise.</small>
     </div>
   </div>
 
