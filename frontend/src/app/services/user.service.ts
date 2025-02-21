@@ -32,7 +32,6 @@ export class UserService {
 
   setUserCurrent(id: string): void {
     localStorage.setItem('userId',id)
-  
   }
 
   getUserCurrent(){
@@ -53,14 +52,5 @@ export class UserService {
       'Authorization': `Bearer ${this.getToken()}`,
     };
     return this.http.get<User>(`${this.apiUrl}details/${id}`,{headers});
-  }
-  loadUser(): void {
-     if (this.isAuthenticated()){
-      console.log("Vous êtes connecté !")
-     }else{
-      this.router.navigate(['/home'])
-      console.log("Vous êtes pas connecté ! Retour à la page d'accueil.")
-     }
-    
   }
 }

@@ -5,6 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ArrayPipe } from './pipes/array.pipe';
 import { CeilPipe } from './pipes/ceil.pipe';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { CeilPipe } from './pipes/ceil.pipe';
     ReactiveFormsModule,
     CommonModule,
     ArrayPipe,
-    CeilPipe
+    CeilPipe,
+    RouterModule
   ],
 })
 export class AppModule { }

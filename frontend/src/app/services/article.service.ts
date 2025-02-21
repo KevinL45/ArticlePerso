@@ -16,6 +16,10 @@ export class ArticleService {
     return this.http.get<Article[]>(`${this.apiUrl}list`);
   }
 
+  uploadImage() {
+  }
+  
+
   article(id: number): Observable<Article> {
     return this.http.get<Article>(`${this.apiUrl}details/${id}`);
   }

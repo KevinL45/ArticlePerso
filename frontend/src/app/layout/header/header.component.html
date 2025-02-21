@@ -1,39 +1,33 @@
 <header class="header">
   <div class="logo">
-    <a href="/accueil">
+    <a [routerLink]="['/accueil']">
       <img src="../../../assets/images/frocus.png" alt="Logo Frocus" width="50" height="50"/>
     </a>
   </div>
   <nav>
-    <!-- <a routerLink="/accueil">Accueil</a>
-    <a routerLink="/article">Article</a>
-    <a routerLink="/galerie">Galerie</a>
-    <a routerLink="/connexion">Connexion</a>
-    <a routerLink="/inscription">Inscription</a> -->
-     
     <div class="dropdown">
-      <a href="/articles" class="dropbtn">Articles</a>
-      <div *ngIf="isAuthenticated()"class="dropdown-content">
-        <a href="/articles/creation">Crée un article</a>
+      <a [routerLink]="['/articles']" class="dropbtn">Articles</a>
+      <div *ngIf="isAuthenticated()" class="dropdown-content">
+        <a [routerLink]="['/articles/creation']">Créer un article</a>
       </div>
     </div>
     
     <div class="dropdown">
-      <a href="/galerie" class="dropbtn">Galerie</a>
-      <div *ngIf="isAuthenticated()"class="dropdown-content">
-        <a href="/galerie/creation">Crée une galerie</a>
+      <a [routerLink]="['/galerie']" class="dropbtn">Galerie</a>
+      <div *ngIf="isAuthenticated()" class="dropdown-content">
+        <a [routerLink]="['/galerie/creation']">Créer une galerie</a>
       </div>
     </div>   
 
     <div class="dropdown">
-      <a href="/categories" class="dropbtn">Catégories</a>
+      <a [routerLink]="['/categories']" class="dropbtn">Catégories</a>
       <div *ngIf="isAuthenticated()" class="dropdown-content">
-        <a href="/categories/creation">Crée une catégorie</a>
+        <a [routerLink]="['/categories/creation']">Créer une catégorie</a>
       </div>
     </div>    
- 
-    <a *ngIf="!isAuthenticated()" href="/connexion">Connexion</a>
-    <!-- <a *ngIf="!isAuthenticated()" href="/inscription">Inscription</a> -->
+
+    <a *ngIf="!isAuthenticated()" [routerLink]="['/connexion']">Connexion</a>
+    <!-- <a *ngIf="!isAuthenticated()" [routerLink]="['/inscription']">Inscription</a> -->
     <button class="btn btn-delete" *ngIf="isAuthenticated()" (click)="logout()">Déconnexion</button>
   </nav>
 </header>

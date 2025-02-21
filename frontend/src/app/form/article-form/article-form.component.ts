@@ -19,7 +19,7 @@ import { User } from '../../models/User';
 export class ArticleFormComponent implements OnInit {
   articleForm: FormGroup;
   categories: Category[] = [];
-  user: User | null = null;
+  user: User = new User;
 
   constructor(
     private categoryService: CategoryService,
@@ -38,7 +38,7 @@ export class ArticleFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadCategories();
-    this.userService.loadUser();
+    this.loadUser();
   }
 
   loadCategories(): void {
@@ -52,8 +52,15 @@ export class ArticleFormComponent implements OnInit {
     );
   }
 
-  loadUser(): void {
-    return this.userService.loadUser();
+  loadUser(): void {    
+      this.userService.findUser(Number(this.userService.getUserCurrent())).subscribe(
+        (data) => {
+          this.user = data
+        },
+        (error) => {
+          console.error('Erreur lors du chargement de l\'utilisateur :', error);
+        }
+      )
   }
 
   onFileChange(event: Event): void {
@@ -73,7 +80,7 @@ export class ArticleFormComponent implements OnInit {
   
 
   save(): void {
-    if (this.articleForm.valid && this.user) {
+    if (this.articleForm.valid) {
       const selectedCategory = this.categories.find(cat => cat.id === Number(this.articleForm.value.category));
       console.log(selectedCategory)
       if (!selectedCategory) {

@@ -19,7 +19,12 @@ export class CategoryFormComponent implements OnInit{
   categoryForm: FormGroup;
 
   ngOnInit(): void {
-    this.userService.loadUser();
+    if (this.userService.isAuthenticated()){
+      console.log("Vous êtes connecté !")
+     }else{
+      this.router.navigate(['/home'])
+      console.log("Vous êtes pas connecté ! Retour à la page d'accueil.")
+     }
   }
 
   constructor(
