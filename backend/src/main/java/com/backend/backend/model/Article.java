@@ -54,13 +54,15 @@ public class Article {
     }
 
     public Article(String title, String description, String imageUrl, Date createdDate, Date updatedDate,
-            Date deletedDate) {
+            Date deletedDate, User user, Category category) {
         this.title = title;
         this.description = description;
         this.imageUrl = imageUrl;
         this.createdDate = createdDate;
         this.updatedDate = updatedDate;
         this.deletedDate = deletedDate;
+        this.user = user;
+        this.category = category;
     }
 
     public long getId() {

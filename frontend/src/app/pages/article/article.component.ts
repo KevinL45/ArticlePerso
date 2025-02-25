@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { ArrayPipe } from '../../pipes/array.pipe';
 import { CeilPipe } from '../../pipes/ceil.pipe';
 import { UserService } from '../../services/user.service';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-article',
@@ -25,7 +26,8 @@ export class ArticleComponent implements OnInit {
 
   articles: Article[] = [];
   currentPage: number = 1;
-  articlesPerPage: number = 8;
+  articlesPerPage: number = 5;
+  url:string = environment.apiUrl;
 
   constructor(private articleService: ArticleService, private userService:UserService) {}
 

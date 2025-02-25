@@ -4,13 +4,14 @@ import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { UserService } from './user.service';
 import { Category } from '../models/Category';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CategoryService {
   
-  private apiUrl = 'http://127.0.0.1:8080/categories/';
+  private apiUrl = environment.apiUrl+'/categories/';
 
   constructor(private http: HttpClient, private router: Router, private userService:UserService) {}
 

@@ -3,12 +3,13 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { UserService } from './user.service';
 import { Gallery } from '../models/Gallery';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class GalleryService {
-  private apiUrl = 'http://127.0.0.1:8080/galleries/';
+  private apiUrl = environment.apiUrl+'/galleries/';
 
   constructor(private http: HttpClient, private userService:UserService) {}
 

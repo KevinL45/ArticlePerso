@@ -38,7 +38,8 @@ public class SecurityConfig {
                                                                 "/articles/list",
                                                                 "/articles/details/{id}",
                                                                 "/galleries/list",
-                                                                "/galleries/details/{id}")
+                                                                "/galleries/details/{id}",
+                                                                "/uploads/{filename}")
                                                 .permitAll()
                                                 .requestMatchers(
                                                                 "/articles/add",

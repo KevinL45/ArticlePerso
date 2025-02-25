@@ -3,12 +3,13 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { User } from '../models/User';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  private apiUrl = "http://127.0.0.1:8080/users/";
+  private apiUrl = environment.apiUrl+'/users/';
   private id: number | null = null;
 
   constructor(private http: HttpClient, private router: Router) {}

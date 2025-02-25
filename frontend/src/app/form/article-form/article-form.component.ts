@@ -20,6 +20,7 @@ export class ArticleFormComponent implements OnInit {
   articleForm: FormGroup;
   categories: Category[] = [];
   user: User = new User;
+  file: File | null = null; 
 
   constructor(
     private categoryService: CategoryService,
@@ -31,7 +32,6 @@ export class ArticleFormComponent implements OnInit {
     this.articleForm = this.fb.group({
       title: ['', [Validators.required, Validators.minLength(3)]],
       description: ['', [Validators.required, Validators.minLength(10)]],
-      imageUrl: ['', [Validators.required]],
       category: [null, [Validators.required]],
     });
   }
@@ -63,20 +63,22 @@ export class ArticleFormComponent implements OnInit {
       )
   }
 
-  onFileChange(event: Event): void {
+   // Méthode mise à jour pour stocker le fichier sélectionné
+   onFileChange(event: Event): void {
     const input = event.target as HTMLInputElement;
-  
-    if (input && input.files && input.files.length > 0) {
-      const file = input.files[0];
-  
-      const formData = new FormData();
-      formData.append("file", file);
-
-          this.articleForm.patchValue({
-            imageUrl: "ok", // On stocke juste l'URL retournée
-          });
+    if (this.file) {
+      if (this.file.size > 10 * 1024 * 1024) { // 10 Mo
+        alert("Fichier trop volumineux ! La taille maximale autorisée est de 10 Mo.");
+        return;
+      }
     }
+    if (input && input.files && input.files.length > 0) {
+      this.file = input.files[0]; // Stocke l'image dans la variable `file`
+      console.log('Image sélectionnée :', this.file);
+    }
+
   }
+  
   
 
   save(): void {
@@ -91,14 +93,14 @@ export class ArticleFormComponent implements OnInit {
       const articleData = new Article(
         this.articleForm.value.title,
         this.articleForm.value.description,
-        this.articleForm.value.imageUrl,
+        '', // L'URL de l'image sera gérée côté backend
         selectedCategory, 
         this.user
       );
 
       console.log('Données envoyées à l\'API :', articleData);
 
-      this.articleService.save(articleData).subscribe(
+      this.articleService.save(articleData, this.file!).subscribe(
         () => {
           console.log('Article ajouté avec succès');
           this.router.navigate(['/articles']);
