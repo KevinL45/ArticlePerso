@@ -16,10 +16,10 @@ export const routes: Routes = [
   { path: 'connexion', component: LoginComponent }, 
   { path: 'articles', component: ArticleComponent }, 
   { path: 'categories', component: CategoryComponent }, 
-  { path: 'galerie', component: GalleryComponent },
+  // { path: 'galerie', component: GalleryComponent },
   
   { path: 'categories/creation', component: CategoryFormComponent }, 
-  { path: 'articles/creation', component: ArticleFormComponent }, 
+  // { path: 'articles/creation', component: ArticleFormComponent }, 
   { path: 'galerie/creation', component: GalleryFormComponent }, 
 
   { path: '', redirectTo: '/accueil', pathMatch: 'full' }, // Redirection par défaut

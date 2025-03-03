@@ -20,8 +20,6 @@ public class GalleryService {
     private Date now = Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant());
 
     public Gallery save(Gallery gallery) {
-        gallery.setCreatedDate(now);
-        gallery.setUpdatedDate(now);
         return galleryRepository.save(gallery);
     }
 

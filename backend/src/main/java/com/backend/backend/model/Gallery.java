@@ -54,12 +54,17 @@ public class Gallery {
     public Gallery() {
     }
 
-    public Gallery(String name, String video, String logo, String background, String description) {
+    public Gallery(String name, String video, String logo, String background, String description, Date createdDate,
+            Date updateDate, Date deletedDate, User user) {
         this.name = name;
         this.video = video;
         this.logo = logo;
         this.background = background;
         this.description = description;
+        this.createdDate = createdDate;
+        this.updatedDate = updateDate;
+        this.deletedDate = deletedDate;
+        this.user = user;
     }
 
     public long getId() {

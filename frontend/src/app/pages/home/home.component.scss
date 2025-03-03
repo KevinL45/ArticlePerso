@@ -32,7 +32,7 @@
       margin: 20px 0;
   
       .presentation, 
-      .biography {
+      .reseau {
         flex: 1; /* Les deux sections prennent un espace égal */
         background-color: #fff; /* Fond blanc */
         color: #000; /* Texte noir */
@@ -44,11 +44,25 @@
           text-align: center;
           color: #444;
         }
-  
-        p {
-          text-align: justify;
-          line-height: 1.6;
+
+        .reseau-icons {
+          display: flex;
+          justify-content: center;
+          gap: 15px; /* Espacement entre les icônes */
+          margin-top: 10px;
+          flex-wrap: wrap; /* Permet aux icônes de passer à la ligne si l'écran est petit */
         }
+      
+        .sociaux {
+          width: 60px; /* Taille par défaut */
+          height: 60px;
+          transition: transform 0.3s ease-in-out;
+      
+          &:hover {
+            transform: scale(1.1); /* Effet de zoom au survol */
+          }
+        }
+
       }
     }
   

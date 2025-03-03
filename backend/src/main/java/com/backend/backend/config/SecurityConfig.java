@@ -37,8 +37,8 @@ public class SecurityConfig {
                                                                 "/categories/details/{id}",
                                                                 "/articles/list",
                                                                 "/articles/details/{id}",
-                                                                "/galleries/list",
-                                                                "/galleries/details/{id}",
+                                                                // "/galleries/list",
+                                                                // "/galleries/details/{id}",
                                                                 "/uploads/{filename}")
                                                 .permitAll()
                                                 .requestMatchers(
@@ -48,9 +48,9 @@ public class SecurityConfig {
                                                                 "categories/add",
                                                                 "categories/update/{id}",
                                                                 "categories/delete/{id}",
-                                                                "galleries/add",
-                                                                "galleries/update/{id}",
-                                                                "galleries/delete/{id}",
+                                                                // "galleries/add",
+                                                                // "galleries/update/{id}",
+                                                                // "galleries/delete/{id}",
                                                                 "users/details/{id}")
                                                 .authenticated())
                                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);

@@ -5,6 +5,8 @@ import { GalleryService } from '../../services/gallery.service';
 import { UserService } from '../../services/user.service';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
+import { Gallery } from '../../models/Gallery';
+import { User } from '../../models/User';
 
 @Component({
   selector: 'app-gallery-form',
@@ -14,6 +16,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 })
 export class GalleryFormComponent implements OnInit{
   galleryForm: FormGroup;
+  logo: File | null = null; 
+  background: File | null = null; 
+  user:User = new User;
+
 
   constructor(
     private galleryService: GalleryService,
@@ -23,13 +29,8 @@ export class GalleryFormComponent implements OnInit{
   ) {
     this.galleryForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(3)]],
-      description: ['', [Validators.required, Validators.minLength(10)]],
-      logo: ['', [Validators.required]],
-      background: ['', [Validators.required]],
+      description: ['', [Validators.required]],
       user_id: [this.userService.getUserCurrent(), Validators.required],
-      created_date: [new Date().toISOString()],
-      updated_date: [new Date().toISOString()],
-      delete_date: [null],
     });
   }
 
@@ -42,12 +43,30 @@ export class GalleryFormComponent implements OnInit{
      }  
   }
 
+  loadUser(): void {    
+    this.userService.findUser(Number(this.userService.getUserCurrent())).subscribe(
+      (data) => {
+        this.user = data
+      },
+      (error) => {
+        console.error('Erreur lors du chargement de l\'utilisateur :', error);
+      }
+    )
+}
+
   save(): void {
     if (this.galleryForm.valid) {
-      const galleryData = this.galleryForm.value;
+      const galleryData = new Gallery(
+        this.galleryForm.value.name,
+        this.galleryForm.value.
+        description,
+        "",
+        "",
+        this.user)
+
       console.log('Gallery crée :', galleryData);
 
-      this.galleryService.save(galleryData).subscribe(
+      this.galleryService.save(galleryData, this.logo!, this.background!).subscribe(
         (response) => {
           console.log('Galerie ajoutée avec succès', response);
           this.router.navigate(['/galerie']);
@@ -61,25 +80,37 @@ export class GalleryFormComponent implements OnInit{
     }
   }
 
-  onFileChange(event: Event, controlName: string): void {
+  
+   // Méthode mise à jour pour stocker le fichier sélectionné
+   onFileLogo(event: Event): void {
     const input = event.target as HTMLInputElement;
-
-    if (input && input.files && input.files.length > 0) {
-      const file = input.files[0];
-      const reader = new FileReader();
-
-      reader.onload = () => {
-        const base64String = reader.result as string;
-        this.galleryForm.patchValue({
-          [controlName]: base64String,
-        });
-      };
-
-      reader.onerror = (error) => {
-        console.error('Erreur lors de la lecture du fichier :', error);
-      };
-
-      reader.readAsDataURL(file);
+    if (this.logo) {
+      if (this.logo.size > 10 * 1024 * 1024) { // 10 Mo
+        alert("Fichier trop volumineux ! La taille maximale autorisée est de 10 Mo.");
+        return;
+      }
     }
+    if (input && input.files && input.files.length > 0) {
+      this.logo = input.files[0]; // Stocke l'image dans la variable `file`
+      console.log('Logo sélectionnée :', this.logo);
+    }
+
+  }
+
+  
+   // Méthode mise à jour pour stocker le fichier sélectionné
+   onFileBackground(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (this.background) {
+      if (this.background.size > 10 * 1024 * 1024) { // 10 Mo
+        alert("Fichier trop volumineux ! La taille maximale autorisée est de 10 Mo.");
+        return;
+      }
+    }
+    if (input && input.files && input.files.length > 0) {
+      this.background = input.files[0]; // Stocke l'image dans la variable `file`
+      console.log('Background sélectionnée :', this.background);
+    }
+
   }
 }

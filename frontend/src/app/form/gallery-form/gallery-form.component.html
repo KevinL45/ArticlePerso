@@ -22,18 +22,18 @@
   <!-- Logo -->
   <div>
     <label for="logo">Logo</label>
-    <input id="logo" type="file" (change)="onFileChange($event, 'logo')" />
-    <div *ngIf="galleryForm.get('logo')?.invalid && galleryForm.get('logo')?.touched">
-      <small *ngIf="galleryForm.get('logo')?.errors?.['required']">Un logo est requis.</small>
+    <input id="logo" type="file" (change)="onFileLogo($event)" />
+    <div *ngIf="!logo && galleryForm.touched">
+      <small>Un logo est requise.</small>
     </div>
   </div>
 
   <!-- Arrière-plan -->
   <div>
     <label for="background">Arrière-plan</label>
-    <input id="background" type="file" (change)="onFileChange($event, 'background')" />
-    <div *ngIf="galleryForm.get('background')?.invalid && galleryForm.get('background')?.touched">
-      <small *ngIf="galleryForm.get('background')?.errors?.['required']">Une image d'arrière-plan est requise.</small>
+    <input id="background" type="file" (change)="onFileBackground($event)" />
+    <div *ngIf="!background && galleryForm.touched">
+      <small>Un arrière plan est requise.</small>
     </div>
   </div>
 
