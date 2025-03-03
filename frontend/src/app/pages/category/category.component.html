@@ -1,10 +1,9 @@
 <div class="categories-container">
-  <h2>Liste des Catégories</h2>
+  <h2>Catégories</h2>
 
   <table class="categories-table">
     <thead>
       <tr>
-        <th>ID</th>
         <th>Nom</th>
         <th *ngIf="isAuthenticated()">Modifier</th>
         <th *ngIf="isAuthenticated()">Supprimer</th>
@@ -12,7 +11,6 @@
     </thead>
     <tbody>
       <tr *ngFor="let category of categories; let i = index">
-        <td>{{ i + 1 }}</td>
         <td>{{ category.name }}</td>
         <td *ngIf="isAuthenticated()">
           <button class="btn btn-edit" (click)="updateCategory(category)">Modifier</button>

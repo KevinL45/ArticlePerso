@@ -31,8 +31,11 @@
       gap: 20px; /* Espace entre les deux sections */
       margin: 20px 0;
   
-      .presentation, 
-      .reseau {
+      .presentation,
+      .reseau,
+      .about,
+      .contact,
+      section {
         flex: 1; /* Les deux sections prennent un espace égal */
         background-color: #fff; /* Fond blanc */
         color: #000; /* Texte noir */
@@ -43,24 +46,6 @@
         h1, h2 {
           text-align: center;
           color: #444;
-        }
-
-        .reseau-icons {
-          display: flex;
-          justify-content: center;
-          gap: 15px; /* Espacement entre les icônes */
-          margin-top: 10px;
-          flex-wrap: wrap; /* Permet aux icônes de passer à la ligne si l'écran est petit */
-        }
-      
-        .sociaux {
-          width: 60px; /* Taille par défaut */
-          height: 60px;
-          transition: transform 0.3s ease-in-out;
-      
-          &:hover {
-            transform: scale(1.1); /* Effet de zoom au survol */
-          }
         }
 
       }
@@ -92,12 +77,46 @@
         }
       }
     }
+
+    .about{
+      text-align: center; /* Centre le contenu */
+
+      .profile {
+        width: 100px; 
+        height: 100px;
+        border-radius: 50%; /* Optionnel : pour un effet arrondi */
+        transition: transform 0.3s ease-in-out;
+        border-radius: 50%;
+
+    
+        &:hover {
+          transform: scale(1.1); /* Effet de zoom au survol */
+        }
+      }
+      
+    }
+
+    .reseau{
+      .reseau-icons {
+        display: flex;
+        justify-content: center;
+        gap: 15px; /* Espacement entre les icônes */
+        margin-top: 10px;
+        flex-wrap: wrap; /* Permet aux icônes de passer à la ligne si l'écran est petit */
+      }
+    
+      .icons {
+        width: 60px; /* Taille par défaut */
+        height: 60px;
+        transition: transform 0.3s ease-in-out;
+    
+        &:hover {
+          transform: scale(1.1); /* Effet de zoom au survol */
+        }
+      }
+    }
   
     .contact {
-      background: #f9f9f9;
-      padding: 2rem;
-      border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   
       form {
         display: flex;
