@@ -16,7 +16,7 @@
           <button class="btn btn-edit" (click)="updateCategory(category)">Modifier</button>
         </td>
         <td *ngIf="isAuthenticated()">
-          <button class="btn btn-delete">Supprimer</button>
+          <button class="btn btn-delete" (click)="removeCategory()">Supprimer</button>
         </td>
       </tr>
     </tbody>

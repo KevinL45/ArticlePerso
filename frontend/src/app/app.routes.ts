@@ -9,18 +9,30 @@ import { CategoryComponent } from './pages/category/category.component';
 import { CategoryFormComponent } from './form/category-form/category-form.component';
 import { ArticleFormComponent } from './form/article-form/article-form.component';
 import { GalleryFormComponent } from './form/gallery-form/gallery-form.component';
+import { AddArticleComponent } from './pages/add-article/add-article.component';
+import { UpdateArticleComponent } from './pages/update-article/update-article.component';
+import { UpdateCategoryComponent } from './pages/update-category/update-category.component';
+import { AddCategoryComponent } from './pages/add-category/add-category.component';
+import { DetailsArticleComponent } from './pages/details-article/details-article.component';
 
 export const routes: Routes = [
   { path: 'accueil', component: HomeComponent }, 
-  { path: 'inscription', component: RegisterComponent }, 
-  { path: 'connexion', component: LoginComponent }, 
-  { path: 'articles', component: ArticleComponent }, 
-  { path: 'categories', component: CategoryComponent }, 
-  // { path: 'galerie', component: GalleryComponent },
+  { path: 'connexion', component: LoginComponent },
+  // { path: 'inscription', component: RegisterComponent }, 
+ 
   
-  { path: 'categories/creation', component: CategoryFormComponent }, 
-  // { path: 'articles/creation', component: ArticleFormComponent }, 
-  { path: 'galerie/creation', component: GalleryFormComponent }, 
+  { path: 'categories', component: CategoryComponent }, 
+  { path: 'categories/creation', component: AddCategoryComponent }, 
+  { path: 'categories/modification', component: UpdateCategoryComponent }, 
+
+  { path: 'articles', component: ArticleComponent }, 
+  { path: 'articles/creation', component: AddArticleComponent }, 
+  { path: 'articles/modification/:id', component: UpdateArticleComponent }, 
+  { path: 'articles/details/:id', component: DetailsArticleComponent }, 
+
+
+  // { path: 'galerie', component: GalleryComponent },
+  // { path: 'galerie/creation', component: GalleryFormComponent }, 
 
   { path: '', redirectTo: '/accueil', pathMatch: 'full' }, // Redirection par défaut
   { path: '**', redirectTo: '/accueil' } // Redirection pour les routes inconnues

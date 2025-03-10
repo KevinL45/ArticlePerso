@@ -7,6 +7,7 @@ import { ArrayPipe } from '../../pipes/array.pipe';
 import { CeilPipe } from '../../pipes/ceil.pipe';
 import { UserService } from '../../services/user.service';
 import { environment } from '../../../environments/environment';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-article',
@@ -29,7 +30,10 @@ export class ArticleComponent implements OnInit {
   articlesPerPage: number = 5;
   url:string = environment.apiUrl;
 
-  constructor(private articleService: ArticleService, private userService:UserService) {}
+  constructor(
+    private articleService: ArticleService, 
+    private userService:UserService, 
+    private router:Router) {}
 
   ngOnInit(): void {
     this.allArticles();
@@ -51,14 +55,20 @@ export class ArticleComponent implements OnInit {
   }
 
   updateArticle(article: Article) {
-    console.log('Modification de l\'article', article);
+    return this.router.navigate(['/articles/modification',article.id]);
+
+  }
+
+  detailsArticle(article: Article) {
+    return this.router.navigate(['/articles/details',article.id]);
+
   }
 
   removeArticle(id: number): void {
     if (confirm('Êtes-vous sûr de vouloir supprimer cet article ?')) {
-      this.articleService.delete(id).subscribe(() => {
-        this.articles = this.articles.filter(article => article.id !== id);
-      });
+      // this.articleService.delete(id).subscribe(() => {
+      //   this.articles = this.articles.filter(article => article.id !== id);
+      // });
     }
   }
 

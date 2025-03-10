@@ -1,6 +1,6 @@
 <div class="articles-container">
-    <div class="article-card" *ngFor="let article of paginatedArticles">
-      <img [src]="url+article.imageUrl" alt="{{ article.title }}" class="article-image" />
+    <div  class="article-card" *ngFor="let article of paginatedArticles">
+      <img  [src]="url+article.imageUrl" alt="{{ article.title }}" class="article-image" />
       <div class="article-content">
         <h2>{{ article.title }}</h2>
         <p class="article-date">{{ article.createdDate | date: 'dd/MM/yyyy' }}</p>

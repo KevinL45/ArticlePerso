@@ -3,6 +3,7 @@ import { CategoryService } from '../../services/category.service';
 import { CommonModule } from '@angular/common';
 import { Category } from '../../models/Category';
 import { UserService } from '../../services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-category',
@@ -14,7 +15,10 @@ import { UserService } from '../../services/user.service';
 export class CategoryComponent implements OnInit {
   categories: Category[] = [];
 
-  constructor(private categoryService: CategoryService, private userService: UserService) {}
+  constructor(
+    private categoryService: CategoryService, 
+    private userService: UserService,
+    private router:Router) {}
 
   ngOnInit(): void {
     this.allCategories();
@@ -36,14 +40,14 @@ export class CategoryComponent implements OnInit {
   }
 
   updateCategory(category: Category) {
-    console.log('Modification de la catégorie :', category);
+    return this.router.navigate(['articles/modification',category.id])
   }
 
-  removeCategory(id: number): void {
+  removeCategory(): void {
     if (confirm('Voulez-vous vraiment supprimer cette catégorie ?')) {
-      this.categoryService.delete(id).subscribe(() => {
-        this.categories = this.categories.filter(category => category.id !== id);
-      });
+      // this.categoryService.delete(id).subscribe(() => {
+      //   this.categories = this.categories.filter(category => category.id !== id);
+      // });
     }
   }
 }
