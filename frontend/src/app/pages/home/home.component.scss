@@ -79,9 +79,10 @@
     }
 
     .about{
-      text-align: center; /* Centre le contenu */
 
       .profile {
+        display: block;
+        margin: 0 auto; // Centre l'image horizontalement
         width: 100px; 
         height: 100px;
         border-radius: 50%; /* Optionnel : pour un effet arrondi */
@@ -160,6 +161,24 @@
           &:hover {
             background: #0056b3;
           }
+        }
+      }
+    }
+    .presentation{
+
+      .logo {
+        display: block;
+        margin: 0 auto; // Centre l'image horizontalement
+        width: 100px; 
+        height: 100px;
+        border-radius: 50%; /* Optionnel : pour un effet arrondi */
+        transition: transform 0.3s ease-in-out;
+        border-radius: 50%;
+        text-align: center;
+
+    
+        &:hover {
+          transform: scale(1.1); /* Effet de zoom au survol */
         }
       }
     }
