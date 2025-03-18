@@ -55,7 +55,7 @@ public class ArticleController {
         System.out.println(article);
 
         try {
-            articleService.save(article);
+            articleService.saveArticle(article);
             return ResponseEntity
                     .status(HttpStatus.CREATED)
                     .body("");
@@ -65,12 +65,34 @@ public class ArticleController {
     }
 
     @PutMapping("update/{id}")
-    public ResponseEntity<String> putArticle(@PathVariable Long id, @RequestBody Article article) {
+    public ResponseEntity<String> putArticle(@PathVariable Long id,
+            @RequestParam("title") String title,
+            @RequestParam("description") String description,
+            @RequestParam("imageUrl") String imageUrl,
+            @RequestParam("category") String categoryJson,
+            @RequestParam("user") String userJson,
+            @RequestPart("file") MultipartFile file) throws IOException, JsonProcessingException {
+
+        // Convertir les objets JSON en Java (catégorie et utilisateur)
+        ObjectMapper objectMapper = new ObjectMapper();
+        Category category = objectMapper.readValue(categoryJson, Category.class);
+        User user = objectMapper.readValue(userJson, User.class);
+
+        String newImageUrl = "";
+        // Mise à jour de l'image si un fichier est fourni
+        if (file != null && !file.isEmpty()) {
+            newImageUrl = articleService.updateImage(file, imageUrl);
+        } else {
+            newImageUrl = imageUrl;
+        }
+
+        Article article = new Article(title, description, newImageUrl, now, now, null, user, category);
+
         try {
-            articleService.update(id, article);
+            articleService.updateArticle(id, article, file);
             return ResponseEntity
                     .status(HttpStatus.CREATED)
-                    .body("L'article a été modifié");
+                    .body("");
         } catch (IllegalArgumentException ex) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
         }

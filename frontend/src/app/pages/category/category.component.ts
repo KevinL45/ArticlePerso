@@ -40,7 +40,7 @@ export class CategoryComponent implements OnInit {
   }
 
   updateCategory(category: Category) {
-    return this.router.navigate(['articles/modification',category.id])
+    return this.router.navigate(['categories/modification',category.id])
   }
 
   removeCategory(): void {

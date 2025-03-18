@@ -1,4 +1,9 @@
+
 <form [formGroup]="articleForm" (ngSubmit)="save()">
+  <div>
+    <h2>{{ isEditMode ? 'Modifier l\'article' : 'Ajouter un article' }}</h2>
+  </div>
+
   <!-- Titre -->
   <div>
     <label for="title">Titre de l'article</label>

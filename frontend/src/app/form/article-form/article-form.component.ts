@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { ArticleService } from '../../services/article.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CategoryService } from '../../services/category.service';
 import { CommonModule } from '@angular/common';
 import { UserService } from '../../services/user.service';
@@ -21,6 +21,9 @@ export class ArticleFormComponent implements OnInit {
   categories: Category[] = [];
   user: User = new User;
   file: File | null = null; 
+  articleId: number | null = null; // Pour savoir si on est en modification
+  isEditMode: boolean = false; // Indique si on est en mode modification
+  articleToEdit!: Article;
 
   constructor(
     private categoryService: CategoryService,
@@ -28,6 +31,7 @@ export class ArticleFormComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private userService: UserService,
+    private route: ActivatedRoute
   ) {
     this.articleForm = this.fb.group({
       title: ['', [Validators.required, Validators.minLength(3)]],
@@ -39,6 +43,32 @@ export class ArticleFormComponent implements OnInit {
   ngOnInit(): void {
     this.loadCategories();
     this.loadUser();
+
+    // Vérifie si un `id` d'article est présent dans l'URL
+    this.route.paramMap.subscribe(params => {
+      const id = params.get('id');
+      if (id) {
+        console.log(id)
+        this.articleId = Number(id);
+        this.isEditMode = true;
+        this.loadArticle(this.articleId);      }
+    });
+    
+  }
+
+  loadArticle(id: number): void {
+    this.articleService.article(id).subscribe(
+      (article) => {
+        console.log("Article récupéré depuis l'API :", article);
+        this.articleToEdit = article;
+        this.articleForm.patchValue({
+          title: article.title,
+          description: article.description,
+          // category: article.category.id 
+        });
+      },
+      (error) => console.error('Erreur lors du chargement de l\'article :', error)
+    );
   }
 
   loadCategories(): void {
@@ -100,15 +130,26 @@ export class ArticleFormComponent implements OnInit {
 
       console.log('Données envoyées à l\'API :', articleData);
 
-      this.articleService.save(articleData, this.file!).subscribe(
-        () => {
-          console.log('Article ajouté avec succès');
-          this.router.navigate(['/articles']);
-        },
-        (error) => {
-          console.error('Erreur lors de l\'ajout de l\'article :', error);
-        }
-      );
+      if (this.isEditMode && this.articleId) {
+        console.log("L'id de l'article modifié : "+this.articleId)
+        // Mise à jour de l'article existant
+        this.articleService.updateArticle(this.articleId, articleData, this.file!).subscribe(
+          () => {
+            console.log('Article mis à jour avec succès');
+            this.router.navigate(['/articles']);
+          },
+          (error) => console.error('Erreur lors de la mise à jour de l\'article :', error)
+        );
+      } else {
+        // Création d'un nouvel article
+        this.articleService.saveArticle(articleData, this.file!).subscribe(
+          () => {
+            console.log('Article ajouté avec succès');
+            this.router.navigate(['/articles']);
+          },
+          (error) => console.error('Erreur lors de l\'ajout de l\'article :', error)
+        );
+      }
     } else {
       console.warn('Le formulaire est invalide ou l\'utilisateur est introuvable.');
     }

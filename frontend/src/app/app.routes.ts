@@ -23,7 +23,7 @@ export const routes: Routes = [
   
   { path: 'categories', component: CategoryComponent }, 
   { path: 'categories/creation', component: AddCategoryComponent }, 
-  { path: 'categories/modification', component: UpdateCategoryComponent }, 
+  { path: 'categories/modification/:id', component: UpdateCategoryComponent }, 
 
   { path: 'articles', component: ArticleComponent }, 
   { path: 'articles/creation', component: AddArticleComponent }, 
