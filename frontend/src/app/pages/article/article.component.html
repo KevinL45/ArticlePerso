@@ -9,7 +9,7 @@
         </p>
         <div class="article-actions">
           <button *ngIf="isAuthenticated()" class="btn btn-primary" (click)="updateArticle(article)">Modifier</button>
-          <button *ngIf="isAuthenticated()" class="btn btn-danger">Supprimer</button>
+          <button *ngIf="isAuthenticated()" class="btn btn-danger" (click)="deleteArticle(article)">Supprimer</button>
         </div>
       </div>
     </div>

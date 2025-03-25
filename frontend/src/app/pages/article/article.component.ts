@@ -64,11 +64,11 @@ export class ArticleComponent implements OnInit {
 
   }
 
-  removeArticle(id: number): void {
+  deleteArticle(art : Article): void {
     if (confirm('Êtes-vous sûr de vouloir supprimer cet article ?')) {
-      // this.articleService.delete(id).subscribe(() => {
-      //   this.articles = this.articles.filter(article => article.id !== id);
-      // });
+      this.articleService.deleteArticle(Number(art.id)).subscribe(() => {
+        this.articles = this.articles.filter(article => article.id !== art.id);
+      });
     }
   }
 

@@ -64,6 +64,10 @@ export class ArticleService {
   }
 
   deleteArticle(id: number): Observable<Article> {
-    return this.http.delete<Article>(`${this.apiUrl}delete/${id}`);
+    const headers = {
+      'Authorization': `Bearer ${this.userService.getToken()}`,
+      
+    };
+    return this.http.delete<Article>(`${this.apiUrl}delete/${id}`,{headers});
   }
 }

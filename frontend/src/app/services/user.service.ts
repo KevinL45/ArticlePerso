@@ -19,7 +19,13 @@ export class UserService {
   }
 
   isAuthenticated(): boolean {
-    return !!localStorage.getItem('token');
+    if(localStorage.getItem('token') && localStorage.getItem('userId')){
+      return !!localStorage.getItem('token');
+    }else{
+      this.logout()
+      return false
+    }
+  
   }
 
   login(userData: User): Observable<{ token: string, userId: number }> {

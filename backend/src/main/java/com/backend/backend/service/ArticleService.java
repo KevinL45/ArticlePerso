@@ -43,6 +43,21 @@ public class ArticleService {
         }
     }
 
+    public void deleteArticle(long id) {
+        Optional<Article> idArticle = this.articleRespoitory.findById(id);
+        Article deletedArticle = idArticle.get();
+        String uploadDir = "uploads/";
+
+        // Supprimer l'ancienne image
+        Path oldFilePath = Paths.get(deletedArticle.getImageUrl().replace("/uploads/", uploadDir));
+        File oldFile = oldFilePath.toFile();
+        if (oldFile.exists()) {
+            oldFile.delete(); // Suppression du fichier
+        }
+        this.articleRespoitory.delete(deletedArticle);
+
+    }
+
     public String saveImage(MultipartFile file) throws IOException {
         // Définir l'emplacement de stockage
         String uploadDir = "uploads/";
