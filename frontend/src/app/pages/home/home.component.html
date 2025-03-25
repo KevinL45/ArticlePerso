@@ -1,8 +1,16 @@
 <div class="home-container">
-    <!-- Slide Section -->
+  <!-- Slide Section -->
     <div class="slider">
       <div class="slides">
-        <img src="../../../assets/images/background.png" alt="Slide 1" />
+        <img 
+          *ngIf="articles.length > 0" 
+          [src]="url + articles[currentIndex].imageUrl" 
+          [alt]="articles[currentIndex].title"
+        />
+         <!-- Superposition sombre -->
+      <!-- Titre de l'article -->
+      <h2 class="slide-title" *ngIf="articles.length > 0" 
+        >{{ articles[currentIndex].title }}</h2>
       </div>
     </div>
     <div class="content-section">

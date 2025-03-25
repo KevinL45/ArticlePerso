@@ -58,7 +58,8 @@ export class CategoryFormComponent implements OnInit{
         console.log("Vous êtes connecté, vous pouvez utiliser le formulaire.")
       },
       (error) => {
-        this.router.navigate(['/home'])
+        this.userService.logout();
+        this.router.navigate(['/home']);
         console.error('Retour à la page d\'accueil, voici l\'erreur :', error);
       }
     )

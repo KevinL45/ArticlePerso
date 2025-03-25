@@ -12,7 +12,7 @@ export class UserService {
   private apiUrl = environment.apiUrl+'/users/';
   private id: number | null = null;
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient) {}
 
   register(userData: User): Observable<User> {
     return this.http.post<User>(`${this.apiUrl}add`, userData);
@@ -34,7 +34,6 @@ export class UserService {
   logout() {
     localStorage.removeItem('token');
     localStorage.removeItem('userId');
-    this.router.navigate(['/home']);
   }
 
   setUserCurrent(id: string): void {

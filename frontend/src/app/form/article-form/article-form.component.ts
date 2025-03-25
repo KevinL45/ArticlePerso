@@ -89,6 +89,7 @@ export class ArticleFormComponent implements OnInit {
           this.user = data
         },
         (error) => {
+          this.userService.logout();
           this.router.navigate(['/home'])
           console.error('Retour à la page d\'accueil, voici l\'erreur :', error);
         }

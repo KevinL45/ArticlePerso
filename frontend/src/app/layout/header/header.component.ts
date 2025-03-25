@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 
 @Component({
@@ -13,10 +13,11 @@ import { RouterModule } from '@angular/router';
 })
 export class HeaderComponent {
 
-  constructor(private userService: UserService){}
+  constructor(private userService: UserService, private router:Router){}
 
     logout(){
       this.userService.logout();
+      this.router.navigate(['/home'])
     }
 
     isAuthenticated(): boolean {
