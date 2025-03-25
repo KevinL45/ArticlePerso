@@ -61,7 +61,6 @@ export class ArticleComponent implements OnInit {
 
   detailsArticle(article: Article) {
     return this.router.navigate(['/articles/details',article.id]);
-
   }
 
   deleteArticle(art : Article): void {

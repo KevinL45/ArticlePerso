@@ -28,7 +28,6 @@ export class CategoryFormComponent implements OnInit{
     this.loadUser();
     this.route.paramMap.subscribe(params =>{
       const id = params.get("id");
-
       if(id){
         console.log ("Id de la catégorie : "+id);
         this.categoryId = Number(id);
@@ -36,7 +35,6 @@ export class CategoryFormComponent implements OnInit{
         this.loadCategory(this.categoryId)
 
       }
-
     })
   }
 

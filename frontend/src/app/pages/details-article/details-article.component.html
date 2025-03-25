@@ -1,1 +1,21 @@
-<p>details-article works!</p>
+<div class="article-detail-container" *ngIf="article">
+    <!-- Image de l'article -->
+    <div class="article-image">
+      <img [src]="url+article.imageUrl" [alt]="article.title">
+    </div>
+  
+    <!-- Contenu de l'article -->
+    <div class="article-content">
+      <h1 class="article-title">{{ article.title }}</h1>
+      <p class="article-date">Publié le {{ article.createdDate | date:'dd MMMM yyyy' }}</p>
+  
+      <!-- Description -->
+      <p class="article-description">{{ article.description }}</p>
+  
+      <!-- Boutons d'actions -->
+      <div class="article-actions">
+        <button class="btn btn-back" (click)="goBack()">← Retour</button>
+        <button *ngIf="isAuthenticated()" class="btn btn-edit" (click)="updateArticle(article)">Modifier</button>
+      </div>
+    </div>
+  </div>

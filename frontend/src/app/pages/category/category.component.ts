@@ -4,16 +4,20 @@ import { CommonModule } from '@angular/common';
 import { Category } from '../../models/Category';
 import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
+import { CeilPipe } from '../../pipes/ceil.pipe';
+import { ArrayPipe } from '../../pipes/array.pipe';
 
 @Component({
   selector: 'app-category',
   standalone: true,
-  imports:[CommonModule],
+  imports:[CommonModule, ArrayPipe,CeilPipe],
   templateUrl: './category.component.html',
   styleUrls: ['./category.component.scss']
 })
 export class CategoryComponent implements OnInit {
   categories: Category[] = [];
+  currentPage: number = 1;
+  categoriesPerPage: number = 5;
 
   constructor(
     private categoryService: CategoryService, 
@@ -50,4 +54,13 @@ export class CategoryComponent implements OnInit {
       });
     }
   }
+
+  get paginatedCategories(): Category[] {
+      const start = (this.currentPage - 1) * this.categoriesPerPage;
+      return this.categories.slice(start, start + this.categoriesPerPage);
+    }
+  
+    changePage(page: number): void {
+      this.currentPage = page;
+    }
 }

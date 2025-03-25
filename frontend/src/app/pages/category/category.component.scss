@@ -15,10 +15,6 @@ h2 {
   margin-bottom: 20px;
 }
 
-th{
-
-}
-
 .categories-table {
   width: 100%;
   border-collapse: collapse;
@@ -71,3 +67,30 @@ th{
 .btn-delete:hover {
   background-color: #c0392b;
 }
+
+  /* Pagination */
+  .pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  
+    button {
+      background: #007bff;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      margin: 0 5px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+  
+      &.active {
+        background: #0056b3;
+      }
+  
+      &:hover {
+        background: #0056b3;
+      }
+    }
+  }
+  

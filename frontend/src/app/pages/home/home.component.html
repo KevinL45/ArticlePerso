@@ -6,6 +6,7 @@
           *ngIf="articles.length > 0" 
           [src]="url + articles[currentIndex].imageUrl" 
           [alt]="articles[currentIndex].title"
+          (click)="detailsArticle(articles[currentIndex])"
         />
          <!-- Superposition sombre -->
       <!-- Titre de l'article -->

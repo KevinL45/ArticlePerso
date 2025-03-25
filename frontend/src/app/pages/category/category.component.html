@@ -10,7 +10,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let category of categories; let i = index">
+      <tr *ngFor="let category of paginatedCategories; let i = index">
         <td>{{ category.name }}</td>
         <td *ngIf="isAuthenticated()">
           <button class="btn btn-edit" (click)="updateCategory(category)">Modifier</button>
@@ -21,4 +21,13 @@
       </tr>
     </tbody>
   </table>
+
+    <!-- Pagination -->
+    <div class="pagination">
+      <button *ngFor="let page of (categories.length / categoriesPerPage | ceil) | array"
+              (click)="changePage(page)"
+              [class.active]="currentPage === page">
+        {{ page }}
+      </button>
+    </div>
 </div>

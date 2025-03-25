@@ -3,6 +3,7 @@ import { ArticleService } from '../../services/article.service';
 import { Article } from '../../models/Article';
 import { CommonModule } from '@angular/common';
 import { environment } from '../../../environments/environment';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -18,7 +19,7 @@ export class HomeComponent {
   currentIndex: number = 0;
 
 
-  constructor(private articleService:ArticleService){
+  constructor(private articleService:ArticleService, private router:Router){
 
   }
 
@@ -33,7 +34,6 @@ export class HomeComponent {
         this.articles = data
           .filter(article => article.updatedDate || article.createdDate)
           .sort((a, b) => {
-            console.log(a.updatedDate)
             const dateA = new Date(a.updatedDate || a.createdDate || 0).getTime();
             const dateB = new Date(b.updatedDate || b.createdDate || 0).getTime();
             return dateB - dateA; // Trier du plus récent au plus ancien
@@ -51,6 +51,10 @@ export class HomeComponent {
     if (this.articles.length > 0) {
       this.currentIndex = (this.currentIndex + 1) % this.articles.length;
     }
+  }
+
+  detailsArticle(article: Article) {
+    return this.router.navigate(['/articles/details',article.id]);
   }
   
   
