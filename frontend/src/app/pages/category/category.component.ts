@@ -43,11 +43,11 @@ export class CategoryComponent implements OnInit {
     return this.router.navigate(['categories/modification',category.id])
   }
 
-  removeCategory(): void {
+  removeCategory(cat : Category): void {
     if (confirm('Voulez-vous vraiment supprimer cette catégorie ?')) {
-      // this.categoryService.delete(id).subscribe(() => {
-      //   this.categories = this.categories.filter(category => category.id !== id);
-      // });
+      this.categoryService.deleteCategroy(Number(cat.id)).subscribe(() => {
+        this.categories = this.categories.filter(category => category.id !== cat.id);
+      });
     }
   }
 }

@@ -48,5 +48,5 @@
   </div>
 
   <!-- Bouton de soumission -->
-  <button type="submit" [disabled]="articleForm.invalid">Ajouter l'article</button>
+  <button type="submit" [disabled]="articleForm.invalid">{{ isEditMode ? 'Modifier' : 'Ajouter un article' }}</button>
 </form>

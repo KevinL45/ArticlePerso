@@ -75,9 +75,10 @@ export class ArticleFormComponent implements OnInit {
     this.categoryService.categories().subscribe(
       (data) => {
         this.categories = data;
+        console.log("Vous êtes connecté, vous pouvez utiliser le formulaire.")
       },
       (error) => {
-        console.error('Erreur lors du chargement des catégories :', error);
+        console.error('Retour à la page d\'accueil, voici l\'erreur :', error);
       }
     );
   }
@@ -88,7 +89,8 @@ export class ArticleFormComponent implements OnInit {
           this.user = data
         },
         (error) => {
-          console.error('Erreur lors du chargement de l\'utilisateur :', error);
+          this.router.navigate(['/home'])
+          console.error('Retour à la page d\'accueil, voici l\'erreur :', error);
         }
       )
   }

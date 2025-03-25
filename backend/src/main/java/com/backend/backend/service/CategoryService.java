@@ -14,7 +14,7 @@ public class CategoryService {
     @Autowired
     private CategoryRepository categoryRepository;
 
-    public Category save(Category category) {
+    public Category saveCategory(Category category) {
         Category nameCategory = categoryRepository.findByName(category.getName());
         if (nameCategory != null) {
             throw new IllegalArgumentException("Le nom de la catégorie existe déjà.");
@@ -22,7 +22,13 @@ public class CategoryService {
         return categoryRepository.save(category);
     }
 
-    public Category update(Long id, Category category) {
+    public void deleteCategory(Long id) {
+        Optional<Category> idCategory = categoryRepository.findById(id);
+        Category deletedCategory = idCategory.get();
+        categoryRepository.delete(deletedCategory);
+    }
+
+    public Category updateCategory(Long id, Category category) {
         Optional<Category> idCategory = categoryRepository.findById(id);
         if (idCategory.isPresent()) {
             Category updatedCategory = idCategory.get();

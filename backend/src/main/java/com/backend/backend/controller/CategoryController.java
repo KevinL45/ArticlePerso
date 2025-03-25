@@ -24,7 +24,7 @@ public class CategoryController {
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<?> addCategory(@RequestBody Category category) {
         try {
-            categoryService.save(category);
+            categoryService.saveCategory(category);
             return ResponseEntity.ok("");
         } catch (IllegalArgumentException ex) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
@@ -34,10 +34,10 @@ public class CategoryController {
     @PutMapping("update/{id}")
     public ResponseEntity<String> putCategory(@PathVariable Long id, @RequestBody Category category) {
         try {
-            categoryService.update(id, category);
+            categoryService.updateCategory(id, category);
             return ResponseEntity
                     .status(HttpStatus.CREATED)
-                    .body("Catégorie modifié avec succès : " + category.getName());
+                    .body("");
         } catch (IllegalArgumentException ex) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
         }
@@ -46,6 +46,11 @@ public class CategoryController {
     @GetMapping("list")
     public List<Category> getAllCategories() {
         return categoryService.getAllCategories();
+    }
+
+    @DeleteMapping("delete/{id}")
+    public void deleCategory(@PathVariable Long id) {
+        categoryService.deleteCategory(id);
     }
 
     @GetMapping("details/{id}")

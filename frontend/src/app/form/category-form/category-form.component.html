@@ -1,12 +1,17 @@
 <form [formGroup]="categoryForm" (ngSubmit)="save()">
+  <div>
+    <h2>{{ isEditMode ? 'Modifier la catégorie' : 'Ajouter une catégorie' }}</h2>
+  </div>
     <div>
-      <label for="name">Ajouter une catégorie</label>
+      <label for="name">Nom</label>
       <input id="name" formControlName="name" type="text">
       <div *ngIf="categoryForm.get('name')?.invalid && categoryForm.get('name')?.touched">
         <small *ngIf="categoryForm.get('name')?.errors?.['required']">Nom requis</small>
         <small *ngIf="categoryForm.get('name')?.errors?.['minlength']">Minimum 3 caractères</small>
       </div>
     </div>
-    <button type="submit" [disabled]="categoryForm.invalid">Ajouter</button>
+    <button type="submit" [disabled]="categoryForm.invalid">
+      {{ isEditMode ? 'Modifier' : 'Ajouter' }}
+    </button>
   </form>
   

@@ -23,11 +23,14 @@ export class CategoryService {
     return this.http.get<Category>(`${this.apiUrl}details/${id}`);
   }
 
-  update(id: number, categoryData: Category): Observable<Category> {
-    return this.http.put<Category>(`${this.apiUrl}update/${id}`, categoryData);
+  updateCategory(id: number, categoryData: Category): Observable<Category> {
+    const headers = {
+      'Authorization': `Bearer ${this.userService.getToken()}`,
+    };
+    return this.http.put<Category>(`${this.apiUrl}update/${id}`, categoryData, { headers });
   }
 
-  save(categoryData: Category): Observable<Category> {
+  saveCategory(categoryData: Category): Observable<Category> {
  
     const headers = {
       'Authorization': `Bearer ${this.userService.getToken()}`,
@@ -35,7 +38,10 @@ export class CategoryService {
     return this.http.post<Category>(`${this.apiUrl}add`, categoryData, { headers });
   }
 
-  delete(id: number): Observable<Category> {
-    return this.http.delete<Category>(`${this.apiUrl}delete/${id}`);
+  deleteCategroy(id: number): Observable<Category> {
+    const headers = {
+      'Authorization': `Bearer ${this.userService.getToken()}`,
+    };
+    return this.http.delete<Category>(`${this.apiUrl}delete/${id}`,{ headers });
   }
 }
