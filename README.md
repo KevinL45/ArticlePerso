@@ -1,4 +1,4 @@
-## 📦 Nom et description
+## Nom et description
 
 Frocus est une application de gestion d’articles que j’ai développée pour partager des informations, présenter mes projets et documenter mes rencontres avec mes clients.
 
@@ -7,15 +7,13 @@ il me permet de centraliser et d’organiser mon contenu de manière efficace. G
 Cette application est en constante évolution.
 Mon objectif est d’en faire un outil polyvalent, parfaitement adapté à mon propre usage et à mes besoins quotidiens.
 
-## 📦 API
+## API
 
-## 📦 Dépendances utilisées
-
-Ce projet utilise **Spring Boot 3.3.11** avec **Java 21**.
+**Spring Boot 3.3.11** avec **Java 21**.
 
 ---
 
-### 📚 Détails des dépendances
+### Détails des dépendances
 
 | Dépendance                     | Description                                 | Version     |
 |--------------------------------|---------------------------------------------|-------------|
@@ -29,7 +27,8 @@ Ce projet utilise **Spring Boot 3.3.11** avec **Java 21**.
 | `jjwt-impl`                    | Implémentation interne JWT                  | 0.11.5      |
 | `jjwt-jackson`                 | Sérialisation JSON pour JWT                 | 0.11.5      |
 
-## 📦 Front
+##  Front
+### Détails des commandes
 
 | Commandes                  | Description                                 | 
 |----------------------------|---------------------------------------------|
