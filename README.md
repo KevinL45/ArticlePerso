@@ -1,11 +1,12 @@
 ## Nom et description
 
-Frocus est une application de gestion d’articles que j’ai développée pour partager des informations, présenter mes projets et documenter mes rencontres avec mes clients.
+Frocus est une application de gestion d’articles que j’ai développée pour centraliser et organiser du contenu de manière claire et efficace.
 
-il me permet de centraliser et d’organiser mon contenu de manière efficace. Grâce à cette application, je peux publier mes expériences, mettre en avant mes créations, suivre l’évolution de mes collaborations professionnelles et partager diverses actualités.
+Elle me permet de publier mes expériences, de valoriser mes projets, de suivre l’évolution de mes collaborations professionnelles et de partager des actualités.
 
-Cette application est en constante évolution.
-Mon objectif est d’en faire un outil polyvalent, parfaitement adapté à mon propre usage et à mes besoins quotidiens.
+L’objectif de Frocus est d’en faire un outil polyvalent, adapté aux besoins de publication du quotidien.
+
+🔄 Ce projet est actuellement en pause, le temps de repenser son positionnement et sa valeur d’usage
 
 ## API
 
