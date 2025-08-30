@@ -1,10 +1,18 @@
 ## Nom et description
 
+<<<<<<< HEAD
 ArticlePerso est une application de gestion d’articles que j’ai développée pour centraliser et organiser du contenu de manière claire et efficace.
 
 Elle me permet de publier mes expériences, de valoriser mes projets, de suivre l’évolution de mes collaborations professionnelles et de partager des actualités.
 
 L’objectif d'aticlePerso est d’en faire un outil polyvalent, adapté aux besoins de publication du quotidien.
+=======
+Une application de gestion d’articles que j’ai développée pour centraliser et organiser du contenu de manière claire et efficace.
+
+Elle me permet de publier mes expériences, de valoriser mes projets, de suivre l’évolution de mes collaborations professionnelles et de partager des actualités.
+
+L’objectif d'est d’en faire un outil polyvalent, adapté aux besoins de publication du quotidien.
+>>>>>>> 00b5b8bc9a89da9a29bba109e9d4990102822cdb
 
 🔄 Ce projet est actuellement en pause, le temps de repenser son positionnement et sa valeur d’usage
 
